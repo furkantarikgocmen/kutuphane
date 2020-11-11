@@ -1,5 +1,6 @@
 package com.ftg.kutuphane.service;
 
+import com.ftg.kutuphane.entitiy.Account;
 import com.ftg.kutuphane.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,5 +12,9 @@ public class AccountService {
     public AccountService(AccountRepository accountRepository, RoleService roleService) {
         this.accountRepository = accountRepository;
         this.roleService = roleService;
+    }
+
+    public Account findAccountByUserName(String userName){
+        return accountRepository.findByUserName(userName);
     }
 }
