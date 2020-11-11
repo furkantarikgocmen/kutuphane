@@ -14,9 +14,9 @@ import java.util.UUID;
 @Table(name = "role", schema = "\"kutuphane_schema\"")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private UUID id;
+    private int id;
 
     @Column(name = "name")
     @NotEmpty(message = "Role name must not be empty")

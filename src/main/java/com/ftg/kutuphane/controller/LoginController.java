@@ -1,5 +1,7 @@
 package com.ftg.kutuphane.controller;
 
+import com.ftg.kutuphane.entitiy.Account;
+import com.ftg.kutuphane.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -13,6 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final AccountService accountService;
+
+    public LoginController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView indexPage(){
@@ -24,6 +31,19 @@ public class LoginController {
         }else{
             modelAndView.setViewName("index");
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/panel")
+    public ModelAndView panel(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //boolean isAdmin = (Arrays.toString(authentication.getAuthorities().toArray()).contains("ADMIN"));
+        //boolean isUser = (Arrays.toString(authentication.getAuthorities().toArray()).contains("USER"));
+        Account account = accountService.findAccountByUserName(authentication.getName());
+
+        modelAndView.addObject("account", account);
+        modelAndView.setViewName("panel");
         return modelAndView;
     }
 }
