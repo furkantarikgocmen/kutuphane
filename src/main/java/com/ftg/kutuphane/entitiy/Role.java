@@ -2,6 +2,7 @@ package com.ftg.kutuphane.entitiy;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 @Builder
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = role, schema = "\"kutuphane_schema\"")
+@Table(name = "role", schema = "\"kutuphane_schema\"")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
