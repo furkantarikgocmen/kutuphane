@@ -17,8 +17,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy nav-flat" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('book') ? 'menu-open' : ''}">
+                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('book') ? 'active' : ''}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Kitap
@@ -41,8 +41,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('publisher') ? 'menu-open' : ''}">
+                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('publisher') ? 'active' : ''}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Yayın Evi
@@ -65,8 +65,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('author') ? 'menu-open' : ''}">
+                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('author') ? 'active' : ''}">
                         <i class="nav-icon fas fa-pen"></i>
                         <p>
                             Yazar
@@ -89,8 +89,8 @@
                     </ul>
                 </li>
 
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}">
+                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Kullanıcı
