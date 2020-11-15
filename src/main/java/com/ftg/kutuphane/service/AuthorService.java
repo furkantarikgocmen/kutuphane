@@ -16,4 +16,12 @@ public class AuthorService {
     public List<Author> findAll(){
         return authorRepository.findAll();
     }
+
+    public long count(){
+        return authorRepository.count();
+    }
+
+    public List<Author> findTop5(){
+        return authorRepository.findTop5ByOrderByIdDesc();
+    }
 }

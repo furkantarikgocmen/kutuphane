@@ -17,4 +17,12 @@ public class PublisherService {
     public List<Publisher> findAll(){
         return publisherRepository.findAll();
     }
+
+    public long count(){
+        return publisherRepository.count();
+    }
+
+    public List<Publisher> findTop5(){
+        return publisherRepository.findTop5ByOrderByIdDesc();
+    }
 }

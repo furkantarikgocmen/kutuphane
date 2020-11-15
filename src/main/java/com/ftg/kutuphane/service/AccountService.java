@@ -4,6 +4,8 @@ import com.ftg.kutuphane.entitiy.Account;
 import com.ftg.kutuphane.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("accountService")
 public class AccountService {
     private final AccountRepository accountRepository;
@@ -16,5 +18,9 @@ public class AccountService {
 
     public Account findAccountByUserName(String userName){
         return accountRepository.findByUserName(userName);
+    }
+
+    public long count(){
+        return accountRepository.count();
     }
 }

@@ -17,4 +17,12 @@ public class BookService {
     public List<Book> findAll(){
         return bookRepository.findAll();
     }
+
+    public long count(){
+        return bookRepository.count();
+    }
+
+    public List<Book> findTop5(){
+        return bookRepository.findTop5ByOrderByIdDesc();
+    }
 }
