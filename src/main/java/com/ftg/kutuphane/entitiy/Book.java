@@ -33,4 +33,6 @@ public class Book {
     @OneToOne
     @JoinTable(name = "book_publisher", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "publisher_id"))
     private Publisher publisher;
+
+    //todo: subName, seriesName, description vs. props
 }

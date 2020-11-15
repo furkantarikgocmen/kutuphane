@@ -28,5 +28,5 @@ public class Author {
     @JoinTable(name = "book_author", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
 
-    //todo: Email, Telephone, name-lastName, active-inactive, birthday vs. props.
+    //todo: Email, name-lastName, birthday vs. props.
 }

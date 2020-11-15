@@ -27,4 +27,6 @@ public class Publisher {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_publisher", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "publisher_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
+
+    //todo: description, telephone, e-mail vs. props
 }

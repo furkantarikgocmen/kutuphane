@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
-
 @Controller
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -41,6 +39,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //boolean isAdmin = (Arrays.toString(authentication.getAuthorities().toArray()).contains("ADMIN"));
+        //boolean isModerator = (Arrays.toString(authentication.getAuthorities().toArray()).contains("MODERATOR"));
         //boolean isUser = (Arrays.toString(authentication.getAuthorities().toArray()).contains("USER"));
         Account account = accountService.findAccountByUserName(authentication.getName());
 

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Yazar Paneli</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- IonIcons -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <!-- Theme style -->
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <div th:insert="components/navBar"></div>
+    <!-- Navigation Bar -->
+    <!-- Left Bar -->
+    <div th:insert="components/sideBar"></div>
+    <!-- Left Bar -->
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Yazar Paneli</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Yazarlar</a></li>
+                            <li class="breadcrumb-item active">Liste</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Kayıtlı Yazarlar Listesi</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Yazar ID</th>
+                                        <th>Yazar Adı</th>
+                                        <th>Güncelle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--/*@thymesVar id="authors" type="com.ftg.kutuphane.entitiy.Author"*/-->
+                                    <tr th:each="author:${authors}" th:value="${author.getId()}">
+                                        <td th:text="${author.getId()}"></td>
+                                        <td th:text="${author.getName()}"></td>
+                                        <td>
+                                            <button
+                                                    type="button" th:class="'btn btn-block btn-outline-warning '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
+                                                    th:href="@{/author/edit/{id}(id=${author.getId()})}"
+                                            >Güncelle</button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                    type="button"
+                                                    th:href="@{/author/delete/{id}(id=${author.getId()})}"
+                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
+                                            >Sil</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Yazar ID</th>
+                                        <th>Yazar Adı</th>
+                                        <th>Güncelle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- Main Content -->
+    <!-- Footer -->
+    <div th:insert="components/footer"></div>
+    <!-- Footer -->
+</div>
+</body>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+
+<!-- DataTables -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+</html>
