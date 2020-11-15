@@ -17,10 +17,18 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    <div th:insert="navBar"></div>
-    <div th:insert="sideBar"></div>
+    <!-- Navigation Bar -->
+    <div th:insert="components/navBar"></div>
+    <!-- Navigation Bar -->
+    <!-- Left Bar -->
+    <div th:insert="components/sideBar"></div>
+    <!-- Left Bar -->
+    <!-- Main Content -->
     <div th:insert="contentWrapper"></div>
-    <div th:insert="footer"></div>
+    <!-- Main Content -->
+    <!-- Footer -->
+    <div th:insert="components/footer"></div>
+    <!-- Footer -->
 </div>
 </body>
 <!-- jQuery -->
