@@ -1,6 +1,8 @@
 package com.ftg.kutuphane.service;
 
 import com.ftg.kutuphane.entitiy.Author;
+import com.ftg.kutuphane.entitiy.BackState;
+import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.repository.AuthorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,19 +32,25 @@ public class AuthorService {
         return authorRepository.findTop5ByOrderByIdDesc();
     }
 
-    public boolean save(Author author){
+
+    public BackState save(Author author){
+        BackState backState = new BackState();
         if(accountService.isAdmin() || accountService.isModerator()){
             try{
                 authorRepository.save(author);
                 logger.info("Author {} {} Saved by {}_{}", author.getName(),author.getLastName(),accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-                return true;
+                backState.setMessage("Yeni Yazar Ekleme İşlemi Başarılı!");
+                backState.setStateCode(StateCode.SUCCESS);
             }catch (Exception e){
                 logger.error("Error Saving Author {} {} by {}_{} {}", author.getName(),author.getLastName(),accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
-                return false;
+                backState.setMessage("Yazar Ekleme İşleminde Bir Hata Oluştu!");
+                backState.setStateCode(StateCode.ERROR);
             }
         }else{
             logger.warn("Access Denied Saving Author{} {} by {}_{}", author.getName(),author.getLastName(),accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-            return false;
+            backState.setMessage("Yazar Ekleme Yetkiniz Bulunmuyor!");
+            backState.setStateCode(StateCode.WARNING);
         }
+        return backState;
     }
 }

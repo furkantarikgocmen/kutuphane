@@ -12,6 +12,8 @@
     <link href="/dist/css/adminlte.min.css" rel="stylesheet">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -96,4 +98,30 @@
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
 <script src="/dist/js/adminlte.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    const state = /*[[${state}]]*/ '';
+    if(state){
+        switch(state.stateCode){
+            case 1:
+                toastr.success(state.message);
+                break;
+            case 2:
+                toastr.info(state.message);
+                break;
+            case 3:
+                toastr.warning(state.message);
+                break;
+            case 4:
+                toastr.error(state.message);
+                break;
+            default: console.log(state);
+        }
+    }
+    /*]]>*/
+</script>
 </html>
