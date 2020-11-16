@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Yeni Yazar</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Theme style -->
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <div th:insert="components/navBar"></div>
+    <!-- Navigation Bar -->
+    <!-- Left Bar -->
+    <div th:insert="components/sideBar"></div>
+    <!-- Left Bar -->
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Yeni Yazar Ekle</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Yazarlar</a></li>
+                            <li class="breadcrumb-item active">Yeni</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Yazar Bilgileri</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" th:action="@{/author/new}" th:object="${author}" method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Adı</label>
+                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adı" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Soyadı</label>
+                                        <input type="text" th:field="*{lastName}" class="form-control" placeholder="Yazar Soyadı" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Açıklama</label>
+                                        <textarea class="form-control" th:field="*{description}" rows="3" placeholder="Yazar Açıklaması" required=""></textarea>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- Main Content -->
+    <!-- Footer -->
+    <div th:insert="components/footer"></div>
+    <!-- Footer -->
+</div>
+</body>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+</html>

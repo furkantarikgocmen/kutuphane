@@ -23,10 +23,14 @@ public class Author {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "lastName")
+    private String lastName;
+
+    @Column(name = "description")
+    private String description;
+
     @Singular
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_author", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
-
-    //todo: Email, name-lastName, birthday vs. props.
 }

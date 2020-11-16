@@ -33,9 +33,8 @@ public class LoginController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView indexPage(){
         ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)){
+        if(accountService.getAuthentication().isAuthenticated() && !(accountService.getAuthentication() instanceof AnonymousAuthenticationToken)){
             modelAndView.setViewName("redirect:/panel");
         }else{
             modelAndView.setViewName("index");
@@ -46,13 +45,7 @@ public class LoginController {
     @RequestMapping(value = "/panel")
     public ModelAndView panel(){ //Principal
         ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //boolean isAdmin = (Arrays.toString(authentication.getAuthorities().toArray()).contains("ADMIN"));
-        //boolean isModerator = (Arrays.toString(authentication.getAuthorities().toArray()).contains("MODERATOR"));
-        //boolean isUser = (Arrays.toString(authentication.getAuthorities().toArray()).contains("USER"));
-        Account account = accountService.findAccountByUserName(authentication.getName());
-
-        modelAndView.addObject("account", account);
+        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("totalBook", bookService.count());
         modelAndView.addObject("totalPublisher", publisherService.count());
         modelAndView.addObject("totalAuthor", authorService.count());

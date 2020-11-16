@@ -41,7 +41,7 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-book"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{/book/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -56,7 +56,7 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-home"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{/publisher/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -71,7 +71,7 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-pen"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{/author/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -86,7 +86,8 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-user"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a @
+                           th:href="@{/user/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -210,6 +211,8 @@
                                     <thead>
                                     <tr>
                                         <th>Adı</th>
+                                        <th>Soyadı</th>
+                                        <th>Açıklama</th>
                                         <th>Toplam Kitap Sayısı</th>
                                     </tr>
                                     </thead>
@@ -217,6 +220,8 @@
                                     <!--/*@thymesVar id="top5Author" type="com.ftg.kutuphane.entitiy.Author"*/-->
                                     <tr th:each="author:${top5Author}" th:value="${author.getId()}">
                                         <td th:text="${author.getName()}"></td>
+                                        <td th:text="${author.getLastName()}"></td>
+                                        <td th:if="${author.getDescription()}" th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${author.getBooks.size()}"></td>
                                     </tr>
                                     </tbody>

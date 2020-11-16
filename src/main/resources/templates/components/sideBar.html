@@ -27,7 +27,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kitap Paneli</p>
                             </a>
@@ -51,7 +51,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yayın Evi Paneli</p>
                             </a>
@@ -75,14 +75,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{/author/}" class="nav-link">
+                            <a th:href="@{/author/}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yazar Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
-                                <i class="nav-icon fas fa-plus"></i>
+                            <a th:href="@{/author/new}" class="nav-link">
+                                <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
                             </a>
                         </li>
@@ -99,7 +99,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kullanıcı Paneli</p>
                             </a>

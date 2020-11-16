@@ -8,8 +8,6 @@
 
     <!-- Font Awesome Icons -->
     <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <!-- IonIcons -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link href="/dist/css/adminlte.min.css" rel="stylesheet">
     <!-- Google Font: Source Sans Pro -->
@@ -62,6 +60,8 @@
                                     <tr>
                                         <th>Yazar ID</th>
                                         <th>Yazar Adı</th>
+                                        <th>Yazar Soyadı</th>
+                                        <th>Yazar Açıklaması</th>
                                         <th>Güncelle</th>
                                         <th>Sil</th>
                                     </tr>
@@ -71,18 +71,22 @@
                                     <tr th:each="author:${authors}" th:value="${author.getId()}">
                                         <td th:text="${author.getId()}"></td>
                                         <td th:text="${author.getName()}"></td>
+                                        <td th:text="${author.getLastName()}"></td>
+                                        <td th:if="${author.getDescription()}" th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
                                         <td>
                                             <button
                                                     type="button" th:class="'btn btn-block btn-outline-warning '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
                                                     th:href="@{/author/edit/{id}(id=${author.getId()})}"
-                                            >Güncelle</button>
+                                            ><i class="fas fa-pen"></i>
+                                            </button>
                                         </td>
                                         <td>
                                             <button
                                                     type="button"
                                                     th:href="@{/author/delete/{id}(id=${author.getId()})}"
                                                     th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
-                                            >Sil</button>
+                                            ><i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -90,6 +94,8 @@
                                     <tr>
                                         <th>Yazar ID</th>
                                         <th>Yazar Adı</th>
+                                        <th>Yazar Soyadı</th>
+                                        <th>Yazar Açıklaması</th>
                                         <th>Güncelle</th>
                                         <th>Sil</th>
                                     </tr>
