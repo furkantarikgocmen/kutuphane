@@ -34,6 +34,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
+                            <!--/*@thymesVar id="totalBook" type="com.ftg.kutuphane.entitiy.Book"*/-->
                             <h3 th:text="${totalBook}"></h3>
 
                             <p>Kitap</p>
@@ -50,6 +51,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
+                            <!--/*@thymesVar id="totalTotalPublisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
                             <h3 th:text="${totalPublisher}"></h3>
 
                             <p>Yayın Evi</p>
@@ -66,6 +68,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
+                            <!--/*@thymesVar id="totalAuthor" type="com.ftg.kutuphane.entitiy.Author"*/-->
                             <h3 th:text="${totalAuthor}"></h3>
 
                             <p>Yazar</p>
@@ -82,6 +85,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
+                            <!--/*@thymesVar id="totalUser" type="com.ftg.kutuphane.entitiy.Account"*/-->
                             <h3 th:text="${totalUser}"></h3>
 
                             <p>Kullanıcı</p>
@@ -89,7 +93,7 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-user"></i>
                         </div>
-                        <a @
+                        <a
                            class="small-box-footer" th:href="@{/user/}">Detaylı Bilgi <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
