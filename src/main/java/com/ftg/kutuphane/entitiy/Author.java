@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -30,10 +31,10 @@ public class Author {
     private String description;
 
     @Singular
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL) //try using set
     @JoinTable(name = "book_author",
             schema = "\"kutuphane_schema\"",
             joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> books;
+    private Set<Book> books;
 }

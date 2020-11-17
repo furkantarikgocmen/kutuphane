@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -29,7 +30,7 @@ public class Publisher {
             schema = "\"kutuphane_schema\"",
             joinColumns = @JoinColumn(name = "publisher_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> books;
+    private Set<Book> books;
 
     //todo: description, telephone, e-mail vs. props
 }

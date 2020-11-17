@@ -66,6 +66,7 @@ public class AuthorService {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
             try {
+                author.setBooks(authorRepository.findById(author.getId()).getBooks());
                 authorRepository.save(author);
                 logger.info("Author {} Updated by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
                 backState.setMessage("Yazar Güncelleme İşlemi Başarılı!");
