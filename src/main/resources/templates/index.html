@@ -2,21 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <title>Kütüphane Otomasyon Giriş</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- Toastr -->
+    <link href="/plugins/toastr/toastr.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -28,9 +31,9 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Lütfen Giriş Yapın</p>
 
-            <form th:action="@{/login}" method="post">
+            <form method="post" th:action="@{/login}">
                 <div class="input-group mb-3">
-                    <input name="userName" type="text" class="form-control" placeholder="Kullanıcı Adı">
+                    <input class="form-control" name="userName" placeholder="Kullanıcı Adı" type="text">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -38,7 +41,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input name="password" type="password" class="form-control" placeholder="Parola">
+                    <input class="form-control" name="password" placeholder="Parola" type="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -48,7 +51,7 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
+                            <input id="remember" type="checkbox">
                             <label for="remember">
                                 Beni Hatırla
                             </label>
@@ -56,28 +59,28 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+                        <button class="btn btn-primary btn-block" type="submit">Giriş Yap</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
-<!--            <div class="social-auth-links text-center mb-3">-->
-<!--                <p>- OR -</p>-->
-<!--                <a href="#" class="btn btn-block btn-primary">-->
-<!--                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook-->
-<!--                </a>-->
-<!--                <a href="#" class="btn btn-block btn-danger">-->
-<!--                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->
-<!--                </a>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; /.social-auth-links &ndash;&gt;-->
+            <!--            <div class="social-auth-links text-center mb-3">-->
+            <!--                <p>- OR -</p>-->
+            <!--                <a href="#" class="btn btn-block btn-primary">-->
+            <!--                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook-->
+            <!--                </a>-->
+            <!--                <a href="#" class="btn btn-block btn-danger">-->
+            <!--                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+-->
+            <!--                </a>-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash; /.social-auth-links &ndash;&gt;-->
 
             <p class="mb-1">
                 <a href="forgot-password.html">Parolamı Unuttum</a>
             </p>
             <p class="mb-0">
-                <a href="register.html" class="text-center">Kayıt Ol</a>
+                <a class="text-center" href="register.html">Kayıt Ol</a>
             </p>
         </div>
         <!-- /.login-card-body -->
@@ -91,6 +94,41 @@
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
 
+    const paramError = /*[[${param.error}]]*/ '';
+    const paramWrong = /*[[${param.wrong}]]*/ '';
+    const paramExpired = /*[[${param.expired}]]*/ '';
+    if (paramWrong) {
+        toastr.error("Kullanıcı Adı Veya Parola Hatalı!");
+    }
+    if (paramExpired) {
+        toastr.warning('Oturumunuz Sonlanmıştır. Lütfen Tekrar Giriş Yapın.');
+    }
+
+    const state = /*[[${state}]]*/ '';
+    if (state) {
+        switch (state.stateCode) {
+            case 1:
+                toastr.success(state.message);
+                break;
+            case 2:
+                toastr.info(state.message);
+                break;
+            case 3:
+                toastr.warning(state.message);
+                break;
+            case 4:
+                toastr.error(state.message);
+                break;
+            default:
+                console.log(state);
+        }
+    }
+    /*]]>*/
+</script>
 </body>
 </html>

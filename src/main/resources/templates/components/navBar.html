@@ -9,10 +9,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a th:href="@{/panel}" class="nav-link">Anasayfa</a>
+            <a class="nav-link" th:href="@{/panel}">Anasayfa</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="mailto:f.tarikgocmen@gmail.com" class="nav-link">İletişim</a>
+            <a class="nav-link" href="mailto:f.tarikgocmen@gmail.com">İletişim</a>
         </li>
     </ul>
 
@@ -37,10 +37,10 @@
                 <span class="badge badge-danger navbar-badge">1</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
+                <a class="dropdown-item" href="#">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img alt="User Avatar" class="img-size-50 mr-3 img-circle" src="/dist/img/user1-128x128.jpg">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Furkan Tarık Göçmen
@@ -53,7 +53,7 @@
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">Bütün Mesajları Gör</a>
+                <a class="dropdown-item dropdown-footer" href="#">Bütün Mesajları Gör</a>
             </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -65,48 +65,48 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">1 Bildirim</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a class="dropdown-item" href="#">
                     <i class="fas fa-envelope mr-2"></i> 1 Yeni Mesaj
                     <span class="float-right text-muted text-sm">3 Gün Önce</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">Bütün Bildirimleri Gör</a>
+                <a class="dropdown-item dropdown-footer" href="#">Bütün Bildirimleri Gör</a>
             </div>
         </li>
         <li class="nav-item dropdown user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="/dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                <img alt="User Image" class="user-image img-circle elevation-2" src="/dist/img/user2-160x160.jpg">
                 <!--/*@thymesVar id="account" type="com.ftg.kutuphane.entitiy.Account"*/-->
                 <span class="d-none d-md-inline" th:text="${account.userName}"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img alt="User Image" class="img-circle elevation-2" src="/dist/img/user2-160x160.jpg">
 
                     <p th:text="${account.getUserName()}">
-<!--                        <small th:text="${account.}"></small>-->
+                        <!--                        <small th:text="${account.}"></small>-->
                     </p>
                 </li>
-<!--                &lt;!&ndash; Menu Body &ndash;&gt;-->
-<!--                <li class="user-body">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-4 text-center">-->
-<!--                            <a href="#">Followers</a>-->
-<!--                        </div>-->
-<!--                        <div class="col-4 text-center">-->
-<!--                            <a href="#">Sales</a>-->
-<!--                        </div>-->
-<!--                        <div class="col-4 text-center">-->
-<!--                            <a href="#">Friends</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; /.row &ndash;&gt;-->
-<!--                </li>-->
-<!--                &lt;!&ndash; Menu Footer&ndash;&gt;-->
+                <!--                &lt;!&ndash; Menu Body &ndash;&gt;-->
+                <!--                <li class="user-body">-->
+                <!--                    <div class="row">-->
+                <!--                        <div class="col-4 text-center">-->
+                <!--                            <a href="#">Followers</a>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-4 text-center">-->
+                <!--                            <a href="#">Sales</a>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-4 text-center">-->
+                <!--                            <a href="#">Friends</a>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; /.row &ndash;&gt;-->
+                <!--                </li>-->
+                <!--                &lt;!&ndash; Menu Footer&ndash;&gt;-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat float-left">Profil</a>
-                    <a th:href="@{/logout}" class="btn btn-default btn-flat float-right">Çıkış Yap</a>
+                    <a class="btn btn-default btn-flat float-left" href="#">Profil</a>
+                    <a class="btn btn-default btn-flat float-right" th:href="@{/logout}">Çıkış Yap</a>
                 </li>
             </ul>
         </li>

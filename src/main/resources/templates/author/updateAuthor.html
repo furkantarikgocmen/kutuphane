@@ -13,7 +13,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Toastr -->
-    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
+    <link href="/plugins/toastr/toastr.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -55,29 +55,34 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" th:action="@{/author/update/{id}(id=${author.getId()})}" th:object="${author}" th:method="POST">
+                            <form role="form" th:action="@{/author/update/{id}(id=${author.getId()})}"
+                                  th:method="POST" th:object="${author}">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input type="text" th:field="*{id}" class="form-control" placeholder="Yazar Adı" required="" disabled>
+                                        <input class="form-control" disabled placeholder="Yazar Adı" required=""
+                                               th:field="*{id}" type="text">
                                     </div>
                                     <div class="form-group">
                                         <label>Adı</label>
-                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adı" required="">
+                                        <input class="form-control" placeholder="Yazar Adı" required=""
+                                               th:field="*{name}" type="text">
                                     </div>
                                     <div class="form-group">
                                         <label>Soyadı</label>
-                                        <input type="text" th:field="*{lastName}" class="form-control" placeholder="Yazar Soyadı" required="">
+                                        <input class="form-control" placeholder="Yazar Soyadı" required=""
+                                               th:field="*{lastName}" type="text">
                                     </div>
                                     <div class="form-group">
                                         <label>Açıklama</label>
-                                        <textarea class="form-control" th:field="*{description}" rows="3" placeholder="Yazar Açıklaması" required=""></textarea>
+                                        <textarea class="form-control" placeholder="Yazar Açıklaması" required=""
+                                                  rows="3" th:field="*{description}"></textarea>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                    <button class="btn btn-primary" type="submit">Kaydet</button>
                                 </div>
                             </form>
                         </div>
@@ -109,8 +114,8 @@
     /*<![CDATA[*/
 
     const state = /*[[${state}]]*/ '';
-    if(state){
-        switch(state.stateCode){
+    if (state) {
+        switch (state.stateCode) {
             case 1:
                 toastr.success(state.message);
                 break;
@@ -123,7 +128,8 @@
             case 4:
                 toastr.error(state.message);
                 break;
-            default: console.log(state);
+            default:
+                console.log(state);
         }
     }
     /*]]>*/

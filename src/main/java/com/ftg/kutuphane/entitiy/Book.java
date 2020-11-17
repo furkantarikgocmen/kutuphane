@@ -24,11 +24,18 @@ public class Book {
     @Column(name = "id")
     private UUID id;
     @OneToOne
-    @JoinTable(name = "book_author", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @JoinTable(
+            name = "book_author",
+            schema = "\"kutuphane_schema\"",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Author author;
 
     @OneToOne
-    @JoinTable(name = "book_publisher", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "publisher_id"))
+    @JoinTable(name = "book_publisher",
+            schema = "\"kutuphane_schema\"",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "publisher_id"))
     private Publisher publisher;
 
     //todo: subName, seriesName, description vs. props

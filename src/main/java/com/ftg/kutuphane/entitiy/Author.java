@@ -31,6 +31,9 @@ public class Author {
 
     @Singular
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "book_author", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @JoinTable(name = "book_author",
+            schema = "\"kutuphane_schema\"",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
 }

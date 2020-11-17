@@ -24,26 +24,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/static/**")
-                .authenticated().and().csrf().disable().formLogin()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/logout").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/panel").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/author/").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/author/new").hasAnyAuthority("ADMIN", "MODERATOR")
+                .antMatchers("/author/update/{id}").hasAnyAuthority("ADMIN", "MODERATOR")
+                .antMatchers("/author/delete/{id}").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable().formLogin().permitAll()
                 .loginPage("/login")
-                .failureUrl("/login?error=true")
+                .failureUrl("/login?wrong=true")
                 .defaultSuccessUrl("/panel")
                 .usernameParameter("userName")
                 .passwordParameter("password")
-                .permitAll().and().logout()
+                .and()
+                .httpBasic()
+                .and()
+                .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling()
-                .accessDeniedPage("/access-denied")
-        ;
+                .logoutSuccessUrl("/login").and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied");
+        http.sessionManagement().maximumSessions(1).expiredUrl("/login?expired=true");
     }
 
     @Override
     public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**", "/static/**", "/dist/**", "/plugins/**");
     }
 }

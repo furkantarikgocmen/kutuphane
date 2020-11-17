@@ -4,9 +4,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-<!--        <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
-<!--             style="opacity: .8">-->
+    <a class="brand-link" th:href="@{/panel}">
+        <!--        <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"-->
+        <!--             style="opacity: .8">-->
         <span class="brand-text font-weight-light">Kütüphane Otomasyon</span>
     </a>
 
@@ -14,7 +14,8 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy nav-flat" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy nav-flat"
+                data-accordion="false" data-widget="treeview" role="menu">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('book') ? 'menu-open' : ''}">
@@ -27,13 +28,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a href="../index.html"
+                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kitap Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
                             </a>
@@ -42,7 +44,7 @@
                 </li>
 
                 <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('publisher') ? 'menu-open' : ''}">
-                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('publisher') ? 'active' : ''}">
+                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('publisher') ? 'active' : ''}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Yayın Evi
@@ -51,13 +53,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a href="../index.html"
+                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yayın Evi Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Yayın Evi Ekle</p>
                             </a>
@@ -66,7 +69,7 @@
                 </li>
 
                 <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('author') ? 'menu-open' : ''}">
-                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('author') ? 'active' : ''}">
+                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('author') ? 'active' : ''}">
                         <i class="nav-icon fas fa-pen"></i>
                         <p>
                             Yazar
@@ -75,13 +78,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{/author/}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}"
+                               th:href="@{/author/}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yazar Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{/author/new}" class="nav-link">
+                            <a class="nav-link" th:href="@{/author/new}">
                                 <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
                             </a>
@@ -90,7 +94,7 @@
                 </li>
 
                 <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}">
-                    <a  th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
+                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Kullanıcı
@@ -99,13 +103,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a href="../index.html"
+                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kullanıcı Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>
                             </a>

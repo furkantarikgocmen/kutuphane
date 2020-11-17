@@ -41,7 +41,8 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-book"></i>
                         </div>
-                        <a th:href="@{/book/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a class="small-box-footer" th:href="@{/book/}">Detaylı Bilgi <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -56,7 +57,8 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-home"></i>
                         </div>
-                        <a th:href="@{/publisher/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a class="small-box-footer" th:href="@{/publisher/}">Detaylı Bilgi <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -71,7 +73,8 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-pen"></i>
                         </div>
-                        <a th:href="@{/author/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                        <a class="small-box-footer" th:href="@{/author/}">Detaylı Bilgi <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -87,7 +90,8 @@
                             <i class="nav-icon fas fa-user"></i>
                         </div>
                         <a @
-                           th:href="@{/user/}" class="small-box-footer">Detaylı Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                           class="small-box-footer" th:href="@{/user/}">Detaylı Bilgi <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -102,10 +106,10 @@
                             <h3 class="card-title">Son Eklenen Kitaplar</h3>
 
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <button class="btn btn-tool" data-card-widget="collapse" type="button">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <button class="btn btn-tool" data-card-widget="remove" type="button">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -123,7 +127,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--/*@thymesVar id="top5Book" type="com.ftg.kutuphane.entitiy.Book"*/-->
+                                    <!--/*@thymesVar id="book" type="com.ftg.kutuphane.entitiy.Book"*/-->
                                     <tr th:each="book:${top5Book}" th:value="${book.getId()}">
                                         <td th:text="${book.getName()}"></td>
                                         <td th:text="${book.getIsbn()}"></td>
@@ -137,8 +141,12 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <a th:href="@{/book/new}" th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}">Yeni Kitap Ekle</a>
-                            <a th:href="@{/book/}" th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}">Bütün Kitapları Gör</a>
+                            <a th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
+                               th:href="@{/book/new}">Yeni
+                                Kitap Ekle</a>
+                            <a th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}"
+                               th:href="@{/book/}">Bütün
+                                Kitapları Gör</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>
@@ -151,10 +159,10 @@
                             <h3 class="card-title">Son Eklenen Yayın Evleri</h3>
 
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <button class="btn btn-tool" data-card-widget="collapse" type="button">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <button class="btn btn-tool" data-card-widget="remove" type="button">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -170,7 +178,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--/*@thymesVar id="top5Publisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
+                                    <!--/*@thymesVar id="publisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
                                     <tr th:each="publisher:${top5Publisher}" th:value="${publisher.getId()}">
                                         <td th:text="${publisher.getName()}"></td>
                                         <td th:text="${publisher.getBooks.size()}"></td>
@@ -182,8 +190,12 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <a th:href="@{/publisher/new}" th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}">Yeni Yayın Evi Ekle</a>
-                            <a th:href="@{/publisher/}" th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}">Bütün Yayın Evlerini Gör</a>
+                            <a th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
+                               th:href="@{/publisher/new}">Yeni
+                                Yayın Evi Ekle</a>
+                            <a th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}"
+                               th:href="@{/publisher/}">Bütün
+                                Yayın Evlerini Gör</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>
@@ -196,10 +208,10 @@
                             <h3 class="card-title">Son Eklenen Yazarlar</h3>
 
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <button class="btn btn-tool" data-card-widget="collapse" type="button">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <button class="btn btn-tool" data-card-widget="remove" type="button">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -217,11 +229,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--/*@thymesVar id="top5Author" type="com.ftg.kutuphane.entitiy.Author"*/-->
+                                    <!--/*@thymesVar id="author" type="com.ftg.kutuphane.entitiy.Author"*/-->
                                     <tr th:each="author:${top5Author}" th:value="${author.getId()}">
                                         <td th:text="${author.getName()}"></td>
                                         <td th:text="${author.getLastName()}"></td>
-                                        <td th:if="${author.getDescription()}" th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
+                                        <td th:if="${author.getDescription()}"
+                                            th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${author.getBooks.size()}"></td>
                                     </tr>
                                     </tbody>
@@ -231,8 +244,12 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <a th:href="@{/author/new}" th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}">Yeni Yazar Ekle</a>
-                            <a th:href="@{/author/}" th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}">Bütün Yazarları Gör</a>
+                            <a th:class="'btn btn-sm btn-outline-primary btn-sm float-left '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
+                               th:href="@{/author/new}">Yeni
+                                Yazar Ekle</a>
+                            <a th:class="'btn btn-sm btn-outline-secondary btn-lg float-right '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') or #strings.contains(#authentication.principal.authorities,'USER') ? '' : 'disabled'}"
+                               th:href="@{/author/}">Bütün
+                                Yazarları Gör</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>

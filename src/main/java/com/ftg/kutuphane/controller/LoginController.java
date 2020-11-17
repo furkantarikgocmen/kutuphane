@@ -1,5 +1,7 @@
 package com.ftg.kutuphane.controller;
 
+import com.ftg.kutuphane.entitiy.BackState;
+import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.service.AccountService;
 import com.ftg.kutuphane.service.AuthorService;
 import com.ftg.kutuphane.service.BookService;
@@ -28,6 +30,18 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView rootPage() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (accountService.getAuthentication().isAuthenticated() && !(accountService.getAuthentication() instanceof AnonymousAuthenticationToken)) {
+            modelAndView.setViewName("redirect:/panel");
+        } else {
+            modelAndView.setViewName("index");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView indexPage() {
         ModelAndView modelAndView = new ModelAndView();
 
@@ -51,6 +65,30 @@ public class LoginController {
         modelAndView.addObject("top5Publisher", publisherService.findTop5());
         modelAndView.addObject("top5Author", authorService.findTop5());
         modelAndView.setViewName("panel");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/access-denied")
+    public ModelAndView accessDenied() {
+        ModelAndView modelAndView = new ModelAndView();
+        BackState backState = new BackState();
+        backState.setMessage("Yetkisiz Erişim Reddedildi!");
+        if (accountService.getAuthentication().isAuthenticated()) {
+            modelAndView.addObject("account", accountService.getActiveAccount());
+            modelAndView.addObject("totalBook", bookService.count());
+            modelAndView.addObject("totalPublisher", publisherService.count());
+            modelAndView.addObject("totalAuthor", authorService.count());
+            modelAndView.addObject("totalUser", accountService.count());
+            modelAndView.addObject("top5Book", bookService.findTop5());
+            modelAndView.addObject("top5Publisher", publisherService.findTop5());
+            modelAndView.addObject("top5Author", authorService.findTop5());
+            modelAndView.setViewName("panel");
+            backState.setStateCode(StateCode.WARNING);
+        } else {
+            modelAndView.setViewName("index");
+            backState.setStateCode(StateCode.ERROR);
+        }
+        modelAndView.addObject("state", backState);
         return modelAndView;
     }
 }
