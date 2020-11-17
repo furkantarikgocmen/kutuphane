@@ -1,6 +1,5 @@
 package com.ftg.kutuphane.service;
 
-import com.ftg.kutuphane.entitiy.Role;
 import com.ftg.kutuphane.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 

@@ -40,13 +40,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         Account account = null;
 
-        try{
+        try {
             account = accountService.findAccountByUserName(userName);
-        }catch (Exception e){
-            logger.error("Error loading user : "+userName + e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error("Error loading user : " + userName + e.getMessage(), e);
         }
 
-        if (account == null){
+        if (account == null) {
             logger.warn("No account with this User Name " + userName);
             throw new UsernameNotFoundException("Kullanıcı Adı veya Şifre hatalı. Lütfen tekrar deneyiniz.");
         }

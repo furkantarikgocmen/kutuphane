@@ -16,6 +16,8 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -74,19 +76,22 @@
                                         <td th:text="${author.getLastName()}"></td>
                                         <td th:if="${author.getDescription()}" th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
                                         <td>
-                                            <button
-                                                    type="button" th:class="'btn btn-block btn-outline-warning '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
-                                                    th:href="@{/author/edit/{id}(id=${author.getId()})}"
-                                            ><i class="fas fa-pen"></i>
-                                            </button>
+                                            <a th:href="@{/author/update/{id}(id=${author.getId()})}">
+                                                <button
+                                                        type="button"
+                                                        th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : 'disabled'}"
+                                                ><i class="fas fa-pen"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                         <td>
-                                            <button
-                                                    type="button"
-                                                    th:href="@{/author/delete/{id}(id=${author.getId()})}"
-                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
-                                            ><i class="fas fa-trash"></i>
-                                            </button>
+                                           <a th:href="@{/author/delete/{id}(id=${author.getId()})}">
+                                               <button
+                                                       type="button"
+                                                       th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
+                                               ><i class="fas fa-trash"></i>
+                                               </button>
+                                           </a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -132,8 +137,11 @@
 <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- page script -->
-<script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
     $(function () {
         $('#example2').DataTable({
             "paging": true,
@@ -145,5 +153,26 @@
             "responsive": true,
         });
     });
+
+    const state = /*[[${state}]]*/ '';
+    if(state){
+        switch(state.stateCode){
+            case 1:
+                toastr.success(state.message);
+                break;
+            case 2:
+                toastr.info(state.message);
+                break;
+            case 3:
+                toastr.warning(state.message);
+                break;
+            case 4:
+                toastr.error(state.message);
+                break;
+            default: console.log(state);
+        }
+    }
+    /*]]>*/
 </script>
+<!-- page script -->
 </html>

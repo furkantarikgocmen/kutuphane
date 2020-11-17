@@ -12,7 +12,7 @@ public enum StateCode {
         this.stateCode = stateCode;
     }
 
-    public int getStateCode(){
+    public int getStateCode() {
         return stateCode;
     }
 }

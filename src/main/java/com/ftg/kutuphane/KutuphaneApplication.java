@@ -12,16 +12,15 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @SpringBootApplication
 public class KutuphaneApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KutuphaneApplication.class, args);
-	}
-
-	//Thymleaf Development Properties
+    //Thymleaf Development Properties
     @Autowired
     private ThymeleafProperties properties;
-
     @Value("${spring.thymeleaf.templates_root:}")
     private String templatesRoot;
+
+    public static void main(String[] args) {
+        SpringApplication.run(KutuphaneApplication.class, args);
+    }
 
     @Bean
     public ITemplateResolver defaultTemplateResolver() {

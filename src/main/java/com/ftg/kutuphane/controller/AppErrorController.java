@@ -1,4 +1,5 @@
 package com.ftg.kutuphane.controller;
+
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -18,12 +19,11 @@ import java.util.Map;
 @Controller
 public class AppErrorController implements ErrorController {
 
+    private final static String ERROR_PATH = "/error";
     /**
      * Error Attributes in the Application
      */
-    private ErrorAttributes errorAttributes;
-
-    private final static String ERROR_PATH = "/error";
+    private final ErrorAttributes errorAttributes;
 
     /**
      * Controller for the Error Controller

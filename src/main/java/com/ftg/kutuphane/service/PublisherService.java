@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("publisherService")
 public class PublisherService {
     private final PublisherRepository publisherRepository;
 
@@ -14,15 +14,15 @@ public class PublisherService {
         this.publisherRepository = publisherRepository;
     }
 
-    public List<Publisher> findAll(){
+    public List<Publisher> findAll() {
         return publisherRepository.findAll();
     }
 
-    public long count(){
+    public long count() {
         return publisherRepository.count();
     }
 
-    public List<Publisher> findTop5(){
+    public List<Publisher> findTop5() {
         return publisherRepository.findTop5ByOrderByIdDesc();
     }
 }

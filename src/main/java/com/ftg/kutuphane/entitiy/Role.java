@@ -1,9 +1,12 @@
 package com.ftg.kutuphane.entitiy;
 
 import lombok.*;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import java.util.UUID;
 
 @Builder
 @AllArgsConstructor

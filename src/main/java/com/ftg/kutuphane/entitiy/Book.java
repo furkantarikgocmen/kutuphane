@@ -14,18 +14,15 @@ import java.util.UUID;
 @Table(name = "book", schema = "\"kutuphane_schema\"")
 public class Book {
 
+    @Column(name = "name")
+    String name;
+    //todo: regex
+    @Column(name = "ısbn")
+    String isbn;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
-
-    @Column(name = "name")
-    String name;
-
-    //todo: regex
-    @Column(name = "ısbn")
-    String isbn;
-
     @OneToOne
     @JoinTable(name = "book_author", schema = "\"kutuphane_schema\"", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Author author;

@@ -1,6 +1,5 @@
 package com.ftg.kutuphane.controller;
 
-import com.ftg.kutuphane.entitiy.Account;
 import com.ftg.kutuphane.service.AccountService;
 import com.ftg.kutuphane.service.AuthorService;
 import com.ftg.kutuphane.service.BookService;
@@ -8,8 +7,6 @@ import com.ftg.kutuphane.service.PublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,19 +28,19 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView indexPage(){
+    public ModelAndView indexPage() {
         ModelAndView modelAndView = new ModelAndView();
 
-        if(accountService.getAuthentication().isAuthenticated() && !(accountService.getAuthentication() instanceof AnonymousAuthenticationToken)){
+        if (accountService.getAuthentication().isAuthenticated() && !(accountService.getAuthentication() instanceof AnonymousAuthenticationToken)) {
             modelAndView.setViewName("redirect:/panel");
-        }else{
+        } else {
             modelAndView.setViewName("index");
         }
         return modelAndView;
     }
 
     @RequestMapping(value = "/panel")
-    public ModelAndView panel(){ //Principal
+    public ModelAndView panel() { //Principal
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("totalBook", bookService.count());

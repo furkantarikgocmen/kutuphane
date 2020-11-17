@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Service("accountService")
 public class AccountService {
@@ -19,35 +18,35 @@ public class AccountService {
         this.roleService = roleService;
     }
 
-    public Account findAccountByUserName(String userName){
+    public Account findAccountByUserName(String userName) {
         return accountRepository.findByUserName(userName);
     }
 
-    public long count(){
+    public long count() {
         return accountRepository.count();
     }
 
-    public Authentication getAuthentication(){
+    public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public String getAuthorities(){
+    public String getAuthorities() {
         return Arrays.toString(getAuthentication().getAuthorities().toArray());
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return getAuthorities().contains("ADMIN");
     }
 
-    public boolean isModerator(){
+    public boolean isModerator() {
         return getAuthorities().contains("MODERATOR");
     }
 
-    public boolean isUser(){
+    public boolean isUser() {
         return getAuthorities().contains("USER");
     }
 
-    public Account getActiveAccount(){
+    public Account getActiveAccount() {
         return findAccountByUserName(getAuthentication().getName());
     }
 }

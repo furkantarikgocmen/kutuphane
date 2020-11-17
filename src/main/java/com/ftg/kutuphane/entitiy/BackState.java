@@ -13,7 +13,7 @@ public class BackState {
         this.message = message;
     }
 
-    public BackState(){
+    public BackState() {
 
     }
 
