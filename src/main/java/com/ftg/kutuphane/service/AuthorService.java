@@ -46,16 +46,16 @@ public class AuthorService {
         if (accountService.isAdmin() || accountService.isModerator()) {
             try {
                 authorRepository.save(author);
-                logger.info("Author {} {} Saved by {}_{}", author.getName(), author.getLastName(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+                logger.info("Author {} {} Saved by {}_{}", author.getName(), author.getSurname(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
                 backState.setMessage("Yeni Yazar Ekleme İşlemi Başarılı!");
                 backState.setStateCode(StateCode.SUCCESS);
             } catch (Exception e) {
-                logger.error("Error Saving Author {} {} by {}_{} {}", author.getName(), author.getLastName(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
+                logger.error("Error Saving Author {} {} by {}_{} {}", author.getName(), author.getSurname(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
                 backState.setMessage("Yazar Ekleme İşleminde Bir Hata Oluştu!");
                 backState.setStateCode(StateCode.ERROR);
             }
         } else {
-            logger.warn("Access Denied Saving Author{} {} by {}_{}", author.getName(), author.getLastName(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+            logger.warn("Access Denied Saving Author{} {} by {}_{}", author.getName(), author.getSurname(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
             backState.setMessage("Yazar Ekleme Yetkiniz Bulunmuyor!");
             backState.setStateCode(StateCode.WARNING);
         }

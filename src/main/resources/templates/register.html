@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title>Kütüphane Otomasyon Giriş</title>
+    <title>Kütüphane Otomasyon Kayıt</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
@@ -29,11 +29,27 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Lütfen Giriş Yapın</p>
+            <p class="login-box-msg">Lütfen Bilgilerinizi Yapın</p>
 
-            <form method="post" th:action="@{/login}">
+            <form th:action="@{/register}" th:method="POST" th:object="${account}">
                 <div class="input-group mb-3">
-                    <input class="form-control" name="userName" placeholder="Kullanıcı Adı" type="text" required>
+                    <input class="form-control" name="name" placeholder="İsim" type="text" required th:field="*{name}">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" name="surname" placeholder="Soyisim" type="text" required th:field="*{surname}">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" name="mail" placeholder="Mail Adresi" type="email" required th:field="*{mail}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -41,31 +57,35 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" name="password" placeholder="Parola" type="password" required>
+                    <input class="form-control" name="userName" placeholder="Kullanıcı Adı" type="text" required th:field="*{userName}">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-id-card"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" name="password" placeholder="Parola" type="password" required th:field="*{password}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input id="remember" type="checkbox">
-                            <label for="remember">
-                                Beni Hatırla
-                            </label>
-                        </div>
-                    </div>
+                <div class="row justify-content-center">
                     <!-- /.col -->
-                    <div class="col-4">
-                        <button class="btn btn-primary btn-block" type="submit">Giriş Yap</button>
+                    <div class="col-6">
+                        <button class="btn btn-primary btn-block" type="submit">Kayıt Ol</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
+
             <p class="mb-0">
-                <a class="text-center" th:href="@{/register}">Kayıt Ol</a>
+                <a class="text-center">Zaten Hesabın Var Mı? </a>
+            </p>
+            <p class="mb-0">
+                <a class="text-center" th:href="@{/login}">Giriş Yap</a>
             </p>
         </div>
         <!-- /.login-card-body -->

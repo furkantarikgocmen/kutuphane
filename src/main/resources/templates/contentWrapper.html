@@ -234,7 +234,7 @@
                                     <!--/*@thymesVar id="author" type="com.ftg.kutuphane.entitiy.Author"*/-->
                                     <tr th:each="author:${top5Author}" th:value="${author.getId()}">
                                         <td th:text="${author.getName()}"></td>
-                                        <td th:text="${author.getLastName()}"></td>
+                                        <td th:text="${author.getSurname()}"></td>
                                         <td th:if="${author.getDescription()}"
                                             th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${author.getBooks.size()}"></td>

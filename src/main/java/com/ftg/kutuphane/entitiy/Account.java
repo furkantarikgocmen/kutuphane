@@ -20,6 +20,18 @@ public class Account {
     @Column(name = "account_id")
     private UUID id;
 
+    @Column(name = "name")
+    @NotEmpty(message = "Please provide an Name")
+    private String name;
+
+    @Column(name = "surname")
+    @NotEmpty(message = "Please provide an Surname")
+    private String surname;
+
+    @Column(name = "mail")
+    @NotEmpty(message = "Please provide an Mail Address")
+    private String mail;
+
     @Column(name = "user_name", unique = true)
     @NotEmpty(message = "Please provide an User Name")
     private String userName;
@@ -31,6 +43,4 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
-    //todo: Email, Telephone, name-lastName, active-inactive props.
 }

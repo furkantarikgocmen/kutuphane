@@ -24,8 +24,8 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "description")
     private String description;

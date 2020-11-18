@@ -1,21 +1,31 @@
 package com.ftg.kutuphane.service;
 
 import com.ftg.kutuphane.entitiy.Account;
+import com.ftg.kutuphane.entitiy.BackState;
+import com.ftg.kutuphane.enums.RoleId;
+import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.repository.AccountRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
 @Service("accountService")
 public class AccountService {
+    private static final Logger logger = LoggerFactory.getLogger(Account.class);
     private final AccountRepository accountRepository;
     private final RoleService roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AccountService(AccountRepository accountRepository, RoleService roleService) {
+    public AccountService(AccountRepository accountRepository, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.accountRepository = accountRepository;
         this.roleService = roleService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public Account findAccountByUserName(String userName) {
@@ -48,5 +58,67 @@ public class AccountService {
 
     public Account getActiveAccount() {
         return findAccountByUserName(getAuthentication().getName());
+    }
+
+    public boolean isAuthenticated() {
+        return getAuthentication().isAuthenticated() && !(getAuthentication() instanceof AnonymousAuthenticationToken);
+    }
+
+    public boolean userNameExists(Account account) {
+        return accountRepository.existsAccountByUserName(account.getUserName());
+    }
+
+    public BackState newAccount(RoleId roleId, Account account) {
+        BackState backState = new BackState();
+        RoleId defaultRole = RoleId.USER;
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        if (userNameExists(account)) {
+            logger.warn("Error Registration User, Username Already Exists  {}", account.getUserName());
+            backState.setMessage("Lütfen Farklı Bir Kullanıcı Adı Deneyin!");
+            backState.setStateCode(StateCode.WARNING);
+        } else if (isAuthenticated()) {
+            if (isAdmin()) {
+                try {
+                    account.setRole(roleService.findById(roleId.getRoleId()));
+                    accountRepository.save(account);
+                    logger.info("User {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
+                    backState.setMessage("Yeni Kullanıcı Kayıt İşlemi Başarılı!");
+                    backState.setStateCode(StateCode.SUCCESS);
+                } catch (Exception e) {
+                    logger.error("Error Registration User {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
+                    backState.setMessage("Yeni Kullanıcı Ekleme İşleminde Bir Hata Oluştu!");
+                    backState.setStateCode(StateCode.ERROR);
+                }
+            } else if (isModerator()) {
+                try {
+                    account.setRole(roleService.findById(defaultRole.getRoleId()));
+                    accountRepository.save(account);
+                    logger.info("User {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
+                    backState.setMessage("Yeni Kullanıcı Kayıt İşlemi Başarılı!");
+                    backState.setStateCode(StateCode.SUCCESS);
+                } catch (Exception e) {
+                    logger.error("Error Registration User {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
+                    backState.setMessage("Yeni Kullanıcı Ekleme İşleminde Bir Hata Oluştu!");
+                    backState.setStateCode(StateCode.ERROR);
+                }
+            } else {
+                logger.warn("Access Denied Registration User {} {} by {}_{}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities());
+                backState.setMessage("Kullanıcı Ekleme Yetkiniz Bulunmuyor!");
+                backState.setStateCode(StateCode.WARNING);
+            }
+        } else {
+            try {
+                account.setRole(roleService.findById(defaultRole.getRoleId()));
+                accountRepository.save(account);
+                logger.info("User {} Registered", account.getUserName());
+                backState.setMessage("Kayıt İşleminiz Başarılı");
+                backState.setStateCode(StateCode.SUCCESS);
+            } catch (Exception e) {
+                logger.error("Error Registration User {} {} {}", account.getName(), account.getSurname(), e.getMessage());
+                backState.setMessage("Kayıt İşleminizde Bir Hata Oluştu");
+                backState.setStateCode(StateCode.ERROR);
+            }
+        }
+        return backState;
     }
 }
