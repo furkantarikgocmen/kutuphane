@@ -34,7 +34,7 @@
                                 <p>Kitap Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
@@ -59,7 +59,7 @@
                                 <p>Yayın Evi Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Yayın Evi Ekle</p>
@@ -84,7 +84,7 @@
                                 <p>Yazar Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" th:href="@{/author/new}">
                                 <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
@@ -109,7 +109,7 @@
                                 <p>Kullanıcı Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>
