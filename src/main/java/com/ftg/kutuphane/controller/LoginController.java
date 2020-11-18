@@ -59,9 +59,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/panel")
-    public ModelAndView panel() { //Principal
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView getPanelObjects(ModelAndView modelAndView){
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("totalBook", bookService.count());
         modelAndView.addObject("totalPublisher", publisherService.count());
@@ -70,6 +68,13 @@ public class LoginController {
         modelAndView.addObject("top5Book", bookService.findTop5());
         modelAndView.addObject("top5Publisher", publisherService.findTop5());
         modelAndView.addObject("top5Author", authorService.findTop5());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/panel")
+    public ModelAndView panel() { //Principal
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView = getPanelObjects(modelAndView);
         modelAndView.setViewName("panel");
         return modelAndView;
     }
@@ -80,14 +85,7 @@ public class LoginController {
         BackState backState = new BackState();
         backState.setMessage("Yetkisiz Erişim Reddedildi!");
         if (accountService.isAuthenticated()){
-            modelAndView.addObject("account", accountService.getActiveAccount());
-            modelAndView.addObject("totalBook", bookService.count());
-            modelAndView.addObject("totalPublisher", publisherService.count());
-            modelAndView.addObject("totalAuthor", authorService.count());
-            modelAndView.addObject("totalUser", accountService.count());
-            modelAndView.addObject("top5Book", bookService.findTop5());
-            modelAndView.addObject("top5Publisher", publisherService.findTop5());
-            modelAndView.addObject("top5Author", authorService.findTop5());
+            modelAndView = getPanelObjects(modelAndView);
             modelAndView.setViewName("panel");
             backState.setStateCode(StateCode.WARNING);
         } else {
@@ -114,7 +112,7 @@ public class LoginController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@Valid @ModelAttribute(value = "account") Account account) {
         ModelAndView modelAndView = new ModelAndView();
-        BackState backState = new BackState();
+        BackState backState;
         backState = accountService.newAccount(RoleId.USER, account);
         if(backState.getStateCode() != 1){
             modelAndView.setViewName("register");

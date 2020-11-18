@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 @Service("accountService")
 public class AccountService {
@@ -68,12 +69,16 @@ public class AccountService {
         return accountRepository.existsAccountByUserName(account.getUserName());
     }
 
+    public Account findById(UUID id) {
+        return accountRepository.findById(id);
+    }
+
     public BackState newAccount(RoleId roleId, Account account) {
         BackState backState = new BackState();
         RoleId defaultRole = RoleId.USER;
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
         if (userNameExists(account)) {
-            logger.warn("Error Registration User, Username Already Exists  {}", account.getUserName());
+            logger.warn("Error Registration Account, Username Already Exists  {}", account.getUserName());
             backState.setMessage("Lütfen Farklı Bir Kullanıcı Adı Deneyin!");
             backState.setStateCode(StateCode.WARNING);
         } else if (isAuthenticated()) {
@@ -81,11 +86,11 @@ public class AccountService {
                 try {
                     account.setRole(roleService.findById(roleId.getRoleId()));
                     accountRepository.save(account);
-                    logger.info("User {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
+                    logger.info("Account {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
                     backState.setMessage("Yeni Kullanıcı Kayıt İşlemi Başarılı!");
                     backState.setStateCode(StateCode.SUCCESS);
                 } catch (Exception e) {
-                    logger.error("Error Registration User {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
+                    logger.error("Error Registration Account {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
                     backState.setMessage("Yeni Kullanıcı Ekleme İşleminde Bir Hata Oluştu!");
                     backState.setStateCode(StateCode.ERROR);
                 }
@@ -93,16 +98,16 @@ public class AccountService {
                 try {
                     account.setRole(roleService.findById(defaultRole.getRoleId()));
                     accountRepository.save(account);
-                    logger.info("User {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
+                    logger.info("Account {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
                     backState.setMessage("Yeni Kullanıcı Kayıt İşlemi Başarılı!");
                     backState.setStateCode(StateCode.SUCCESS);
                 } catch (Exception e) {
-                    logger.error("Error Registration User {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
+                    logger.error("Error Registration Account {} {} by {}_{} {}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
                     backState.setMessage("Yeni Kullanıcı Ekleme İşleminde Bir Hata Oluştu!");
                     backState.setStateCode(StateCode.ERROR);
                 }
             } else {
-                logger.warn("Access Denied Registration User {} {} by {}_{}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities());
+                logger.warn("Access Denied Registration Account {} {} by {}_{}", account.getName(), account.getSurname(), getActiveAccount().getUserName(), getAuthorities());
                 backState.setMessage("Kullanıcı Ekleme Yetkiniz Bulunmuyor!");
                 backState.setStateCode(StateCode.WARNING);
             }
@@ -110,14 +115,37 @@ public class AccountService {
             try {
                 account.setRole(roleService.findById(defaultRole.getRoleId()));
                 accountRepository.save(account);
-                logger.info("User {} Registered", account.getUserName());
+                logger.info("Account {} Registered", account.getUserName());
                 backState.setMessage("Kayıt İşleminiz Başarılı");
                 backState.setStateCode(StateCode.SUCCESS);
             } catch (Exception e) {
-                logger.error("Error Registration User {} {} {}", account.getName(), account.getSurname(), e.getMessage());
+                logger.error("Error Registration Account {} {} {}", account.getName(), account.getSurname(), e.getMessage());
                 backState.setMessage("Kayıt İşleminizde Bir Hata Oluştu");
                 backState.setStateCode(StateCode.ERROR);
             }
+        }
+        return backState;
+    }
+
+    public BackState updateAccount(Account account) {
+        BackState backState = new BackState();
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        if (!account.getPassword().equals("")) {
+            account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+        } else {
+            account.setPassword(accountRepository.findById(account.getId()).getPassword());
+        }
+        try {
+            account.setRole(accountRepository.findById(account.getId()).getRole());
+            account.setUserName(accountRepository.findById(account.getId()).getUserName());
+            accountRepository.save(account);
+            logger.info("Account {} Updated", account.getUserName());
+            backState.setMessage("Güncelleme İşleminiz Başarılı");
+            backState.setStateCode(StateCode.SUCCESS);
+        } catch (Exception e) {
+            logger.error("Error Updating Account {} {}", account.getUserName(), e.getMessage());
+            backState.setMessage("Güncelleme İşleminizde Bir Hata Oluştu");
+            backState.setStateCode(StateCode.ERROR);
         }
         return backState;
     }

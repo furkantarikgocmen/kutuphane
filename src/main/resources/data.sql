@@ -6,7 +6,8 @@ INSERT INTO kutuphane_schema."role" (id,name) VALUES
 	 (3,'USER');
 
 INSERT INTO kutuphane_schema.account (account_id,"password",user_name,name,surname,mail,role_id) VALUES
-	 ('47852672-38f0-4cf6-adde-fdf0cfae5178','$2a$10$q2awP67azUvY0a9aJgMJaeQhmN4JrO.4jJrihHulwOWyL3p4H4Dlm','Furkan Tarık','Göçmen','f.tarikgocmen@gmail.com','user',1);
+	 ('47852672-38f0-4cf6-adde-fdf0cfae5178','$2a$10$q2awP67azUvY0a9aJgMJaeQhmN4JrO.4jJrihHulwOWyL3p4H4Dlm','admin','Furkan Tarık','Göçmen','f.tarikgocmen@gmail.com',1);
+
 
 INSERT INTO kutuphane_schema.book (id,ısbn,name) VALUES
 	 ('08273528-d2cc-427e-ba88-f27c3a594cc5','9789757064916','Aldatma Sanatı');
