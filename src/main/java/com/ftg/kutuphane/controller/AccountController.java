@@ -85,8 +85,9 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView updateAccount(@Valid @ModelAttribute(value = "anotherAccount") Account account, @PathVariable("id") UUID id) {
+    public ModelAndView updateAccount(@Valid @ModelAttribute(value = "anotherAccount") Account account, @PathVariable("id") UUID id, @RequestParam(value = "rol") int rol) {
         ModelAndView modelAndView = new ModelAndView();
+        account.setRole(roleService.findById(rol));
         modelAndView.addObject("state",accountService.updateAccount(account));
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("anotherAccount", accountService.findById(id));
