@@ -1,16 +1,13 @@
 package com.ftg.kutuphane.controller;
 
 import com.ftg.kutuphane.entitiy.Account;
-import com.ftg.kutuphane.entitiy.Author;
 import com.ftg.kutuphane.enums.RoleId;
 import com.ftg.kutuphane.service.AccountService;
+import com.ftg.kutuphane.service.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -21,9 +18,11 @@ import java.util.UUID;
 public class AccountController {
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
     private final AccountService accountService;
+    private final RoleService roleService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, RoleService roleService) {
         this.accountService = accountService;
+        this.roleService = roleService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -46,9 +45,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ModelAndView newAccount(@ModelAttribute(value = "accountObject") Account account) {
+    public ModelAndView newAccount(@ModelAttribute(value = "accountObject") Account account, @RequestParam(value = "rol") int rol) {
         ModelAndView modelAndView = new ModelAndView();
         Account newAccount = new Account();
+        account.setRole(roleService.findById(rol));
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("state", accountService.newAccount(account));
         modelAndView.addObject("accountObject", newAccount);
