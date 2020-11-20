@@ -1,7 +1,6 @@
 package com.ftg.kutuphane.service;
 
 import com.ftg.kutuphane.entitiy.Account;
-import com.ftg.kutuphane.entitiy.Author;
 import com.ftg.kutuphane.entitiy.BackState;
 import com.ftg.kutuphane.enums.RoleId;
 import com.ftg.kutuphane.enums.StateCode;
@@ -75,7 +74,7 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public List<Account> findAll(){
+    public List<Account> findAll() {
         return accountRepository.findAll();
     }
 
@@ -141,9 +140,9 @@ public class AccountService {
             account.setPassword(accountRepository.findById(account.getId()).getPassword());
         }
         try {
-            if(!isAdmin())
+            if (!isAdmin())
                 account.setRole(accountRepository.findById(account.getId()).getRole());
-            if(account.getRole() == null)
+            if (account.getRole() == null)
                 account.setRole(accountRepository.findById(account.getId()).getRole());
             account.setUserName(accountRepository.findById(account.getId()).getUserName());
             accountRepository.save(account);

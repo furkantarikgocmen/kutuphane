@@ -34,7 +34,8 @@
                                 <p>Kitap Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
+                        <li class="nav-item"
+                            th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
@@ -59,7 +60,8 @@
                                 <p>Yayın Evi Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
+                        <li class="nav-item"
+                            th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" href="../index.html">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Yayın Evi Ekle</p>
@@ -84,7 +86,8 @@
                                 <p>Yazar Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
+                        <li class="nav-item"
+                            th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" th:href="@{/author/new}">
                                 <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
@@ -93,7 +96,8 @@
                     </ul>
                 </li>
 
-                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}"
+                    th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                     <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
@@ -103,13 +107,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{/account/}"
-                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}"
+                               th:href="@{/account/}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kullanıcı Paneli</p>
                             </a>
                         </li>
-                        <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
+                        <li class="nav-item"
+                            th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                             <a class="nav-link" th:href="@{/account/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>

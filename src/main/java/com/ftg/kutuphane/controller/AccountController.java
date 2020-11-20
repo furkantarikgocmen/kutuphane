@@ -1,7 +1,6 @@
 package com.ftg.kutuphane.controller;
 
 import com.ftg.kutuphane.entitiy.Account;
-import com.ftg.kutuphane.enums.RoleId;
 import com.ftg.kutuphane.service.AccountService;
 import com.ftg.kutuphane.service.RoleService;
 import org.slf4j.Logger;
@@ -26,7 +25,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView panel(){
+    public ModelAndView panel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("accounts", accountService.findAll());
         modelAndView.addObject("account", accountService.getActiveAccount());
@@ -68,7 +67,7 @@ public class AccountController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(@Valid @ModelAttribute(value = "ownAccount") Account account) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("state",accountService.updateAccount(account));
+        modelAndView.addObject("state", accountService.updateAccount(account));
         modelAndView.addObject("ownAccount", accountService.getActiveAccount());
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.setViewName("account/updateAccount");
@@ -88,7 +87,7 @@ public class AccountController {
     public ModelAndView updateAccount(@Valid @ModelAttribute(value = "anotherAccount") Account account, @PathVariable("id") UUID id, @RequestParam(value = "rol") int rol) {
         ModelAndView modelAndView = new ModelAndView();
         account.setRole(roleService.findById(rol));
-        modelAndView.addObject("state",accountService.updateAccount(account));
+        modelAndView.addObject("state", accountService.updateAccount(account));
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("anotherAccount", accountService.findById(id));
         modelAndView.setViewName("account/updateAccount");
@@ -96,7 +95,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteAccount(@PathVariable("id") UUID id){
+    public ModelAndView deleteAccount(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", accountService.delete(accountService.findById(id)));
         modelAndView.addObject("account", accountService.getActiveAccount());

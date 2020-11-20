@@ -2,7 +2,6 @@ package com.ftg.kutuphane.controller;
 
 import com.ftg.kutuphane.entitiy.Account;
 import com.ftg.kutuphane.entitiy.BackState;
-import com.ftg.kutuphane.enums.RoleId;
 import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.service.AccountService;
 import com.ftg.kutuphane.service.AuthorService;
@@ -10,10 +9,8 @@ import com.ftg.kutuphane.service.BookService;
 import com.ftg.kutuphane.service.PublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,7 +48,7 @@ public class LoginController {
     public ModelAndView indexPage() {
         ModelAndView modelAndView = new ModelAndView();
 
-        if (accountService.isAuthenticated()){
+        if (accountService.isAuthenticated()) {
             modelAndView.setViewName("redirect:/panel");
         } else {
             modelAndView.setViewName("index");
@@ -59,7 +56,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    public ModelAndView getPanelObjects(ModelAndView modelAndView){
+    public ModelAndView getPanelObjects(ModelAndView modelAndView) {
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("totalBook", bookService.count());
         modelAndView.addObject("totalPublisher", publisherService.count());
@@ -84,7 +81,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         BackState backState = new BackState();
         backState.setMessage("Yetkisiz Erişim Reddedildi!");
-        if (accountService.isAuthenticated()){
+        if (accountService.isAuthenticated()) {
             modelAndView = getPanelObjects(modelAndView);
             modelAndView.setViewName("panel");
             backState.setStateCode(StateCode.WARNING);
@@ -100,7 +97,7 @@ public class LoginController {
     public ModelAndView registerPage() {
         ModelAndView modelAndView = new ModelAndView();
 
-        if (accountService.isAuthenticated()){
+        if (accountService.isAuthenticated()) {
             modelAndView.setViewName("redirect:/panel");
         } else {
             modelAndView.addObject("account", new Account());
@@ -114,10 +111,10 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         BackState backState;
         backState = accountService.newAccount(account);
-        if(backState.getStateCode() != StateCode.SUCCESS.getStateCode()){
+        if (backState.getStateCode() != StateCode.SUCCESS.getStateCode()) {
             modelAndView.setViewName("register");
             modelAndView.addObject(account);
-        }else
+        } else
             modelAndView.setViewName("index");
         modelAndView.addObject("state", backState);
         return modelAndView;

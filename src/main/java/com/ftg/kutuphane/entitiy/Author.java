@@ -3,7 +3,6 @@ package com.ftg.kutuphane.entitiy;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 

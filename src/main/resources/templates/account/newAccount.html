@@ -81,14 +81,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Kullanıcı Parolası</label>
-                                        <input class="form-control" placeholder="Kullanıcı Parolası" required="" minlength="5"
+                                        <input class="form-control" minlength="5" placeholder="Kullanıcı Parolası"
+                                               required=""
                                                th:field="*{password}" type="password">
                                     </div>
                                     <div class="form-group">
                                         <label>Kullanıcı Rolü</label>
                                         <div class="form-group clearfix">
                                             <div class="icheck-danger ">
-                                                <input checked="" id="radioPrimary1" name="rol" th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
+                                                <input checked="" id="radioPrimary1" name="rol"
+                                                       th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
                                                        th:value="${T(com.ftg.kutuphane.enums.RoleId).ADMIN.getRoleId()}"
                                                        type="radio">
                                                 <label for="radioPrimary1">
@@ -96,7 +98,8 @@
                                                 </label>
                                             </div>
                                             <div class="icheck-primary ">
-                                                <input id="radioPrimary2" name="rol" th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
+                                                <input id="radioPrimary2" name="rol"
+                                                       th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
                                                        th:value="${T(com.ftg.kutuphane.enums.RoleId).MODERATOR.getRoleId()}"
                                                        type="radio">
                                                 <label for="radioPrimary2">
@@ -104,7 +107,9 @@
                                                 </label>
                                             </div>
                                             <div class="icheck-success ">
-                                                <input id="radioPrimary3" name="rol" th:value="${T(com.ftg.kutuphane.enums.RoleId).USER.getRoleId()}" checked
+                                                <input checked id="radioPrimary3"
+                                                       name="rol"
+                                                       th:value="${T(com.ftg.kutuphane.enums.RoleId).USER.getRoleId()}"
                                                        type="radio">
                                                 <label for="radioPrimary3">
                                                     USER

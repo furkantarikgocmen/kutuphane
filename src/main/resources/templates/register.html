@@ -33,7 +33,7 @@
 
             <form th:action="@{/register}" th:method="POST" th:object="${account}">
                 <div class="input-group mb-3">
-                    <input class="form-control" name="name" placeholder="İsim" type="text" required th:field="*{name}">
+                    <input class="form-control" name="name" placeholder="İsim" required th:field="*{name}" type="text">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -41,7 +41,8 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" name="surname" placeholder="Soyisim" type="text" required th:field="*{surname}">
+                    <input class="form-control" name="surname" placeholder="Soyisim" required th:field="*{surname}"
+                           type="text">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -49,7 +50,8 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" name="mail" placeholder="Mail Adresi" type="email" required th:field="*{mail}">
+                    <input class="form-control" name="mail" placeholder="Mail Adresi" required th:field="*{mail}"
+                           type="email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -57,7 +59,8 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" name="userName" placeholder="Kullanıcı Adı" type="text" required th:field="*{userName}">
+                    <input class="form-control" name="userName" placeholder="Kullanıcı Adı" required th:field="*{userName}"
+                           type="text">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-id-card"></span>
@@ -65,7 +68,8 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" name="password" placeholder="Parola" type="password" required th:field="*{password}" minlength="5">
+                    <input class="form-control" minlength="5" name="password" placeholder="Parola" required
+                           th:field="*{password}" type="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

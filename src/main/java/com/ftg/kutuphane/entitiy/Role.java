@@ -1,7 +1,6 @@
 package com.ftg.kutuphane.entitiy;
 
 import com.ftg.kutuphane.enums.RoleId;
-import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

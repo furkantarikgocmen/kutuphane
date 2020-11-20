@@ -11,5 +11,7 @@ public enum RoleId {
         this.roleId = roleId;
     }
 
-    public int getRoleId(){return roleId;}
+    public int getRoleId() {
+        return roleId;
+    }
 }
