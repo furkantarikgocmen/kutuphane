@@ -136,7 +136,7 @@ public class AccountService {
     public BackState updateAccount(Account account) {
         BackState backState = new BackState();
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
-        if (!account.getPassword().equals("")) {
+        if (!account.getPassword().equals("*****")) {
             account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
         } else {
             account.setPassword(accountRepository.findById(account.getId()).getPassword());

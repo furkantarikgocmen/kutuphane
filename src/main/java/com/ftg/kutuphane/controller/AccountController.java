@@ -60,15 +60,17 @@ public class AccountController {
     public ModelAndView updatePage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("account", accountService.getActiveAccount());
+        modelAndView.addObject("ownAccount", accountService.getActiveAccount());
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(@Valid @ModelAttribute(value = "account") Account account) {
+    public ModelAndView update(@Valid @ModelAttribute(value = "ownAccount") Account account) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("state",accountService.updateAccount(account));
+        modelAndView.addObject("ownAccount", accountService.getActiveAccount());
+        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
     }
@@ -83,21 +85,22 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView updateAccount(@Valid @ModelAttribute(value = "account") Account account, @PathVariable("id") UUID id) {
+    public ModelAndView updateAccount(@Valid @ModelAttribute(value = "anotherAccount") Account account, @PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("state",accountService.updateAccount(account));
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("anotherAccount", accountService.findById(id));
-        modelAndView.addObject("state",accountService.updateAccount(account));
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/delete/id{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteAccount(@PathVariable("id") UUID id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", accountService.delete(accountService.findById(id)));
         modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("accounts", accountService.findAll());
+        modelAndView.setViewName("account/panelAccount");
         return modelAndView;
     }
 }
