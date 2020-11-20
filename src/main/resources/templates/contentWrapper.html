@@ -94,7 +94,7 @@
                             <i class="nav-icon fas fa-user"></i>
                         </div>
                         <a class="small-box-footer"
-                           th:href="@{/user/}" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Detaylı Bilgi <i
+                           th:href="@{/account/}" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Detaylı Bilgi <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

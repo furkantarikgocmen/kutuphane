@@ -1,6 +1,7 @@
 package com.ftg.kutuphane.service;
 
 import com.ftg.kutuphane.entitiy.Account;
+import com.ftg.kutuphane.entitiy.Author;
 import com.ftg.kutuphane.entitiy.BackState;
 import com.ftg.kutuphane.enums.RoleId;
 import com.ftg.kutuphane.enums.StateCode;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Service("accountService")
@@ -73,7 +75,11 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public BackState newAccount(RoleId roleId, Account account) {
+    public List<Account> findAll(){
+        return accountRepository.findAll();
+    }
+
+    public BackState newAccount(Account account) {
         BackState backState = new BackState();
         RoleId defaultRole = RoleId.USER;
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
@@ -84,7 +90,7 @@ public class AccountService {
         } else if (isAuthenticated()) {
             if (isAdmin()) {
                 try {
-                    account.setRole(roleService.findById(roleId.getRoleId()));
+                    account.setRole(roleService.findById(account.getRole().getId()));
                     accountRepository.save(account);
                     logger.info("Account {} Registered by {}_{}", account.getUserName(), getActiveAccount().getUserName(), getAuthorities());
                     backState.setMessage("Yeni Kullanıcı Kayıt İşlemi Başarılı!");
@@ -146,6 +152,27 @@ public class AccountService {
             logger.error("Error Updating Account {} {}", account.getUserName(), e.getMessage());
             backState.setMessage("Güncelleme İşleminizde Bir Hata Oluştu");
             backState.setStateCode(StateCode.ERROR);
+        }
+        return backState;
+    }
+
+    public BackState delete(Account account) {
+        BackState backState = new BackState();
+        if (isAdmin()) {
+            try {
+                accountRepository.delete(account);
+                logger.info("Account {} Deleted by {}_{}", account.getId(), getActiveAccount().getUserName(), getAuthorities());
+                backState.setMessage("Kullanıcı Silme İşlemi Başarılı!");
+                backState.setStateCode(StateCode.SUCCESS);
+            } catch (Exception e) {
+                logger.error("Error Deleting Account {} by {}_{} {}", account.getId(), getActiveAccount().getUserName(), getAuthorities(), e.getMessage());
+                backState.setMessage("Kullanıcı Silme İşleminde Bir Hata Oluştu!");
+                backState.setStateCode(StateCode.ERROR);
+            }
+        } else {
+            logger.warn("Access Denied Deleting Account {} by {}_{}", account.getId(), getActiveAccount().getUserName(), getAuthorities());
+            backState.setMessage("Kullanıcı Silme Yetkiniz Bulunmuyor!");
+            backState.setStateCode(StateCode.WARNING);
         }
         return backState;
     }

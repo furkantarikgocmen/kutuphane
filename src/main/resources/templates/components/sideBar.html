@@ -93,7 +93,7 @@
                     </ul>
                 </li>
 
-                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}">
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
                     <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
@@ -103,14 +103,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html"
+                            <a th:href="@{/account/}"
                                th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kullanıcı Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item" th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">
-                            <a class="nav-link" href="../index.html">
+                            <a class="nav-link" th:href="@{/account/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>
                             </a>

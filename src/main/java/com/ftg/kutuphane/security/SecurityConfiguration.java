@@ -32,14 +32,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/logout").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/panel").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                //Author
                 .antMatchers("/author/").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
                 .antMatchers("/author/new").hasAnyAuthority("ADMIN", "MODERATOR")
                 .antMatchers("/author/update/{id}").hasAnyAuthority("ADMIN", "MODERATOR")
                 .antMatchers("/author/delete/{id}").hasAuthority("ADMIN")
-                .antMatchers("/account").hasAnyAuthority("ADMIN", "MODERATOR")
-                .antMatchers("/account/update").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                //Account
+                .antMatchers("/account/").hasAnyAuthority("ADMIN", "MODERATOR")
+                .antMatchers("/account/new").hasAnyAuthority("ADMIN", "MODERATOR")
                 .antMatchers("/account/update/{id}").hasAuthority("ADMIN")
                 .antMatchers("/account/delete/{id}").hasAuthority("ADMIN")
+                //Own Account Updates
+                .antMatchers("/account/update").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -65,6 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/dist/**", "/plugins/**");
+                .antMatchers("/dist/**", "/plugins/**");
     }
 }

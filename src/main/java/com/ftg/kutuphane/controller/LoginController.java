@@ -113,8 +113,8 @@ public class LoginController {
     public ModelAndView register(@Valid @ModelAttribute(value = "account") Account account) {
         ModelAndView modelAndView = new ModelAndView();
         BackState backState;
-        backState = accountService.newAccount(RoleId.USER, account);
-        if(backState.getStateCode() != 1){
+        backState = accountService.newAccount(account);
+        if(backState.getStateCode() != StateCode.SUCCESS.getStateCode()){
             modelAndView.setViewName("register");
             modelAndView.addObject(account);
         }else

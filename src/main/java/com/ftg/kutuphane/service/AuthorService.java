@@ -88,7 +88,7 @@ public class AuthorService {
         BackState backState = new BackState();
         if (accountService.isAdmin()) {
             try {
-                if (bookService.deleteBooksByAuthor(author).getStateCode() == 1) {
+                if (bookService.deleteBooksByAuthor(author).getStateCode() == StateCode.SUCCESS.getStateCode()) {
                     authorRepository.delete(author);
                     logger.info("Author {} Deleted by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
                     backState.setMessage("Yazar Silme İşlemi Başarılı!");
@@ -104,7 +104,7 @@ public class AuthorService {
                 backState.setStateCode(StateCode.ERROR);
             }
         } else {
-            logger.warn("Access Denied Deleting Author{} by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+            logger.warn("Access Denied Deleting Author {} by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
             backState.setMessage("Yazar Silme Yetkiniz Bulunmuyor!");
             backState.setStateCode(StateCode.WARNING);
         }
