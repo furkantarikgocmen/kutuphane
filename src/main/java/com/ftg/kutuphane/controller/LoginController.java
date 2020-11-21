@@ -57,7 +57,6 @@ public class LoginController {
     }
 
     public ModelAndView getPanelObjects(ModelAndView modelAndView) {
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("totalBook", bookService.count());
         modelAndView.addObject("totalPublisher", publisherService.count());
         modelAndView.addObject("totalAuthor", authorService.count());

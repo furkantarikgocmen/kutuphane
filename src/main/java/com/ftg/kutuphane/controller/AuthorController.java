@@ -27,7 +27,6 @@ public class AuthorController {
     public ModelAndView panel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("authors", authorService.findAll());
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.setViewName("author/panelAuthor");
         return modelAndView;
     }
@@ -35,7 +34,6 @@ public class AuthorController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView newAuthorPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         Author author = new Author();
         modelAndView.addObject("author", author);
         modelAndView.setViewName("author/newAuthor");
@@ -46,7 +44,6 @@ public class AuthorController {
     public ModelAndView newAuthor(@ModelAttribute(value = "author") Author author) {
         ModelAndView modelAndView = new ModelAndView();
         Author newAuthor = new Author();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("state", authorService.save(author));
         modelAndView.addObject("author", newAuthor);
         modelAndView.setViewName("author/newAuthor");
@@ -57,7 +54,6 @@ public class AuthorController {
     public ModelAndView updateAuthorPage(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         Author author = authorService.findById(id);
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("author", author);
         modelAndView.setViewName("author/updateAuthor");
         return modelAndView;
@@ -77,7 +73,6 @@ public class AuthorController {
     public ModelAndView deleteAuthor(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", authorService.delete(authorService.findById(id)));
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("authors", authorService.findAll());
         modelAndView.setViewName("author/panelAuthor");
         return modelAndView;

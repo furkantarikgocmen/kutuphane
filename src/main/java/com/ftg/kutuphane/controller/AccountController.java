@@ -28,7 +28,6 @@ public class AccountController {
     public ModelAndView panel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("accounts", accountService.findAll());
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.setViewName("account/panelAccount");
         return modelAndView;
     }
@@ -36,7 +35,6 @@ public class AccountController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView newAccountPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         Account account = new Account();
         modelAndView.addObject("accountObject", account);
         modelAndView.setViewName("account/newAccount");
@@ -48,7 +46,6 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView();
         Account newAccount = new Account();
         account.setRole(roleService.findById(rol));
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("state", accountService.newAccount(account));
         modelAndView.addObject("accountObject", newAccount);
         modelAndView.setViewName("account/newAccount");
@@ -58,7 +55,6 @@ public class AccountController {
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public ModelAndView updatePage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("ownAccount", accountService.getActiveAccount());
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
@@ -69,7 +65,6 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", accountService.updateAccount(account));
         modelAndView.addObject("ownAccount", accountService.getActiveAccount());
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
     }
@@ -77,7 +72,6 @@ public class AccountController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public ModelAndView updateAccountPage(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("anotherAccount", accountService.findById(id));
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
@@ -88,7 +82,6 @@ public class AccountController {
         ModelAndView modelAndView = new ModelAndView();
         account.setRole(roleService.findById(rol));
         modelAndView.addObject("state", accountService.updateAccount(account));
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("anotherAccount", accountService.findById(id));
         modelAndView.setViewName("account/updateAccount");
         return modelAndView;
@@ -98,7 +91,6 @@ public class AccountController {
     public ModelAndView deleteAccount(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", accountService.delete(accountService.findById(id)));
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("accounts", accountService.findAll());
         modelAndView.setViewName("account/panelAccount");
         return modelAndView;
