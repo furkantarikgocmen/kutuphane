@@ -43,23 +43,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         try {
             account = accountService.findAccountByUserName(userName);
         } catch (Exception e) {
-            logger.error("Error loading user : " + userName + e.getMessage(), e);
+            logger.error("Error Loading User : " + userName + e.getMessage(), e);
         }
 
         if (account == null) {
-            logger.warn("No account with this User Name " + userName);
+            logger.warn("No Account With This User Name " + userName);
             throw new UsernameNotFoundException("Kullanıcı Adı veya Şifre hatalı. Lütfen tekrar deneyiniz.");
         }
 
         if (!bCryptPasswordEncoder.matches(authentication.getCredentials().toString(), account.getPassword())) {
-            logger.warn("Password is wrong for user " + account.getUserName() + " with id " + account.getId());
+            logger.warn("Password Is Wrong For User " + account.getUserName() + " With Id " + account.getId());
             throw new BadCredentialsException("Kullanıcı Adı veya Şifre hatalı. Lütfen tekrar deneyiniz.");
         }
 
         final List<GrantedAuthority> grantedAuths = new ArrayList<>();
         grantedAuths.add(new SimpleGrantedAuthority(account.getRole().getName()));
         final UserDetails principal = new User(userName, password, grantedAuths);
-        logger.info("Logged in user " + account.getUserName() + " with id " + account.getId());
+        logger.info("Logged In User " + account.getUserName() + " With Id " + account.getId());
         return new UsernamePasswordAuthenticationToken(principal, password, grantedAuths);
     }
 
