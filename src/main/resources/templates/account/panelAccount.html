@@ -83,7 +83,7 @@
                                             <a
                                                     th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : ' disabled'}"
                                                     th:href="@{/account/update/{id}(id=${accountObject.getId()})}"
-                                                    th:unless="${account.getUserName()} == ${accountObject.getUserName()}"
+                                                    th:unless="${#authentication.principal.getUserName()} == ${accountObject.getUserName()}"
                                                     type="button"
                                             ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
                                             </a>
@@ -92,7 +92,7 @@
                                             <a
                                                     th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : 'disabled'}"
                                                     th:href="@{/account/delete/{id}(id=${accountObject.getId()})}"
-                                                    th:unless="${account.getUserName()} == ${accountObject.getUserName()}"
+                                                    th:unless="${#authentication.principal.getUserName()} == ${accountObject.getUserName()}"
                                                     type="button"
                                             ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
                                             </a>
