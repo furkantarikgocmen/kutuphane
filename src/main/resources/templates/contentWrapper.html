@@ -95,7 +95,7 @@
                         </div>
                         <a class="small-box-footer"
                            th:href="@{/account/}"
-                           th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Detaylı
+                           th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Detaylı
                             Bilgi <i
                                     class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -149,7 +149,7 @@
                         <div class="card-footer clearfix">
                             <a class="btn btn-sm btn-outline-primary btn-sm float-left"
                                th:href="@{/book/new}"
-                               th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Yeni
+                               th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Yeni
                                 Kitap Ekle</a>
                             <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
                                th:href="@{/book/}">Bütün Kitapları Gör</a>
@@ -198,7 +198,7 @@
                         <div class="card-footer clearfix">
                             <a class="btn btn-sm btn-outline-primary btn-sm float-left "
                                th:href="@{/publisher/new}"
-                               th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Yeni
+                               th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Yeni
                                 Yayın Evi Ekle</a>
                             <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
                                th:href="@{/publisher/}">Bütün Yayın Evlerini Gör</a>
@@ -252,7 +252,7 @@
                         <div class="card-footer clearfix">
                             <a class="btn btn-sm btn-outline-primary btn-sm float-left"
                                th:href="@{/author/new}"
-                               th:if="${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR')}">Yeni
+                               th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Yeni
                                 Yazar Ekle</a>
                             <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
                                th:href="@{/author/}">Bütün Yazarları Gör</a>

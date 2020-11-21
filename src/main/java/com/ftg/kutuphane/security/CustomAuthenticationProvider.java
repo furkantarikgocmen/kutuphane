@@ -2,6 +2,7 @@ package com.ftg.kutuphane.security;
 
 import com.ftg.kutuphane.entitiy.Account;
 import com.ftg.kutuphane.service.AccountService;
+import com.ftg.kutuphane.service.MyUserDetailSerivce;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -9,9 +10,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,10 +26,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
     private final AccountService accountService;
+    private final MyUserDetailSerivce myUserDetailSerivce;
 
-    public CustomAuthenticationProvider(AccountService accountService) {
+    public CustomAuthenticationProvider(AccountService accountService, MyUserDetailSerivce myUserDetailSerivce) {
         super();
         this.accountService = accountService;
+        this.myUserDetailSerivce = myUserDetailSerivce;
     }
 
     @Override
@@ -56,11 +59,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Kullanıcı Adı veya Şifre hatalı. Lütfen tekrar deneyiniz.");
         }
 
-        final List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority(account.getRole().getName()));
-        final UserDetails principal = new User(userName, password, grantedAuths);
+        final UserDetails principal = myUserDetailSerivce.loadUserByUsername(userName);
         logger.info("Logged In User " + account.getUserName() + " With Id " + account.getId());
-        return new UsernamePasswordAuthenticationToken(principal, password, grantedAuths);
+        return new UsernamePasswordAuthenticationToken(principal, principal.getPassword(), principal.getAuthorities());
     }
 
     @Override

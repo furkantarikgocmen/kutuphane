@@ -80,18 +80,18 @@
                                         <td th:text="${author.getBooks().size()}"></td>
                                         <td>
                                             <a
-                                                    th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? '' : ' disabled'}"
+                                                    th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR') ? '' : ' disabled'}"
                                                     th:href="@{/author/update/{id}(id=${author.getId()})}"
                                                     type="button"
-                                            ><i th:class="''+${#strings.contains(#authentication.principal.authorities,'ADMIN') or #strings.contains(#authentication.principal.authorities,'MODERATOR') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
                                             </a>
                                         </td>
                                         <td>
                                             <a
-                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
+                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : 'disabled'}"
                                                     th:href="@{/author/delete/{id}(id=${author.getId()})}"
                                                     type="button"
-                                            ><i th:class="''+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
                                             </a>
                                         </td>
                                     </tr>

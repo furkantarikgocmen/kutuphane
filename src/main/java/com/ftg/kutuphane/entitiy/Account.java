@@ -43,4 +43,14 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public Account(Account account) {
+        this.id = account.getId();
+        this.name = account.getName();
+        this.surname = account.getSurname();
+        this.mail = account.getMail();
+        this.userName = account.getUserName();
+        this.password = account.getPassword();
+        this.role = account.getRole();
+    }
 }

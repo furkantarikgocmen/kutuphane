@@ -90,7 +90,7 @@
                                         <div class="form-group clearfix">
                                             <div class="icheck-danger ">
                                                 <input checked="" id="radioPrimary1" name="rol"
-                                                       th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
+                                                       th:disabled="!${#strings.contains(#authentication.authorities,'ADMIN')}"
                                                        th:value="${T(com.ftg.kutuphane.enums.RoleId).ADMIN.getRoleId()}"
                                                        type="radio">
                                                 <label for="radioPrimary1">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="icheck-primary ">
                                                 <input id="radioPrimary2" name="rol"
-                                                       th:disabled="!${#strings.contains(#authentication.principal.authorities,'ADMIN')}"
+                                                       th:disabled="!${#strings.contains(#authentication.authorities,'ADMIN')}"
                                                        th:value="${T(com.ftg.kutuphane.enums.RoleId).MODERATOR.getRoleId()}"
                                                        type="radio">
                                                 <label for="radioPrimary2">

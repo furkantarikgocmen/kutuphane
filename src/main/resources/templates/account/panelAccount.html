@@ -81,20 +81,20 @@
                                         <td th:text="${accountObject.getRole().getName()}"></td>
                                         <td>
                                             <a
-                                                    th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : ' disabled'}"
+                                                    th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : ' disabled'}"
                                                     th:href="@{/account/update/{id}(id=${accountObject.getId()})}"
                                                     th:unless="${account.getUserName()} == ${accountObject.getUserName()}"
                                                     type="button"
-                                            ><i th:class="''+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
                                             </a>
                                         </td>
                                         <td>
                                             <a
-                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? '' : 'disabled'}"
+                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : 'disabled'}"
                                                     th:href="@{/account/delete/{id}(id=${accountObject.getId()})}"
                                                     th:unless="${account.getUserName()} == ${accountObject.getUserName()}"
                                                     type="button"
-                                            ><i th:class="''+${#strings.contains(#authentication.principal.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
                                             </a>
                                         </td>
                                     </tr>
