@@ -7,18 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 //@Builder
 @Entity
 @Table(name = "role", schema = "\"kutuphane_schema\"")
 public class Role {
     @Id
-    @NotEmpty(message = "Role id must not be empty")
     @Column(name = "id")
+    @NotEmpty(message = "Role id must not be empty")
+    @NotNull(message = "Id must not be null")
     private int id;
 
     @Column(name = "name")
     @NotEmpty(message = "Role name must not be empty")
+    @NotNull(message = "Name must not be null")
     private String name;
 
     public Role(RoleId roleId, @NotEmpty(message = "Role name must not be empty") String name) {

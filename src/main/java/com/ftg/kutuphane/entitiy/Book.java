@@ -21,24 +21,27 @@ public class Book {
     @Column(name = "id")
     private UUID id;
 
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "Please provide an Name")
+    @NotNull(message = "Name must not be null")
     @Column(name = "name")
     String name;
 
     //todo: regex
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "Please provide an ISBN")
+    @NotNull(message = "ISBN must not be null")
     @Column(name = "ısbn")
     String isbn;
 
-    @Column(name = "subName")
+    @Column(name = "sub_name")
+    @NotNull(message = "SubName must not be null")
     String subName;
 
-    @Column(name = "seriesName")
+    @Column(name = "series_name")
+    @NotNull(message = "SeriesName must not be null")
     String seriesName;
 
     @Column(name = "description")
+    @NotNull(message = "Description must not be null")
     String description;
 
     @ManyToOne

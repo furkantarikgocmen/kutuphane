@@ -139,8 +139,7 @@
                                     <tr th:each="book:${top5Book}" th:value="${book.getId()}">
                                         <td th:text="${book.getIsbn()}"></td>
                                         <td th:text="${book.getName()}"></td>
-                                        <td th:if="${book.getDescription()}"
-                                            th:text="${book.getDescription().length() < 150} ? ${book.getDescription()} : ${book.getDescription().substring(0,150) + '...'} "></td>
+                                        <td th:text="${book.getDescription().length() < 150} ? ${book.getDescription()} : ${book.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${book.getSubName()}"></td>
                                         <td th:text="${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()}"></td>
                                         <td th:text="${book.getPublisher().getName()}"></td>
@@ -244,8 +243,7 @@
                                     <tr th:each="author:${top5Author}" th:value="${author.getId()}">
                                         <td th:text="${author.getName()}"></td>
                                         <td th:text="${author.getSurname()}"></td>
-                                        <td th:if="${author.getDescription()}"
-                                            th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
+                                        <td th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${author.getBooks.size()}"></td>
                                     </tr>
                                     </tbody>

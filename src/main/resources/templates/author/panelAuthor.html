@@ -75,8 +75,7 @@
                                         <td th:text="${author.getId()}"></td>
                                         <td th:text="${author.getName()}"></td>
                                         <td th:text="${author.getSurname()}"></td>
-                                        <td th:if="${author.getDescription()}"
-                                            th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
+                                        <td th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
                                         <td th:text="${author.getBooks().size()}"></td>
                                         <td>
                                             <a

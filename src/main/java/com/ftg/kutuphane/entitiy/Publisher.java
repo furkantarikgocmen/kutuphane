@@ -3,6 +3,8 @@ package com.ftg.kutuphane.entitiy;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,6 +23,8 @@ public class Publisher {
     private UUID id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Please provide an Name")
+    @NotNull(message = "Name must not be null")
     private String name;
 
     @Singular
