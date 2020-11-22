@@ -1,7 +1,6 @@
 package com.ftg.kutuphane.controller;
 
 import com.ftg.kutuphane.entitiy.Author;
-import com.ftg.kutuphane.service.AccountService;
 import com.ftg.kutuphane.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,11 +15,9 @@ import java.util.UUID;
 @RequestMapping(value = "/author")
 public class AuthorController {
     private final AuthorService authorService;
-    private final AccountService accountService;
 
-    public AuthorController(AuthorService authorService, AccountService accountService) {
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
-        this.accountService = accountService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -63,7 +60,6 @@ public class AuthorController {
     public ModelAndView updateAuthor(@PathVariable("id") UUID id, @ModelAttribute(value = "author") Author author) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", authorService.update(author));
-        modelAndView.addObject("account", accountService.getActiveAccount());
         modelAndView.addObject("author", authorService.findById(id));
         modelAndView.setViewName("author/updateAuthor");
         return modelAndView;

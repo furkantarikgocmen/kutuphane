@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Yeni Kitap</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Toastr -->
+    <link href="/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <!-- Theme style -->
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <div th:insert="components/navBar"></div>
+    <!-- Navigation Bar -->
+    <!-- Left Bar -->
+    <div th:insert="components/sideBar"></div>
+    <!-- Left Bar -->
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Yeni Kitap Ekle</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Kitaplar</a></li>
+                            <li class="breadcrumb-item active">Yeni</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Kitap Bilgileri</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" th:action="@{/book/new}" th:method="POST" th:object="${book}">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>ISBN</label>
+                                        <input class="form-control" placeholder="Kitap ISBN Numarası" required=""
+                                               th:field="*{isbn}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Adı</label>
+                                        <input class="form-control" placeholder="Kitap Adı" required=""
+                                               th:field="*{name}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Alt Adı</label>
+                                        <input class="form-control" placeholder="Kitap Alt Adı" required=""
+                                               th:field="*{subName}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Seri Adı</label>
+                                        <input class="form-control" placeholder="Kitap Seri Adı"
+                                               th:field="*{seriesName}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Açıklama</label>
+                                        <textarea class="form-control" placeholder="Kitap Açıklaması" required=""
+                                                  rows="3" th:field="*{description}"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-12 col-sm-6 float-lg-left">
+                                            <label>Yazar</label>
+                                            <select th:field="*{author.id}" class="select2" style="width: 100%;" data-dropdown-css-class="select2-success">
+                                                <option th:each="author, i: ${authors}"
+                                                        th:text="${author.getName()} + ' ' + ${author.getSurname()}"
+                                                        th:value="${author.getId()}"></option>
+                                            </select>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-12 col-sm-6 float-lg-right">
+                                            <label>Yayın Evi</label>
+                                            <select th:field="*{publisher.id}" class="select2" style="width: 100%;" data-dropdown-css-class="select2-success">
+                                                <option th:each="publisher, i: ${publishers}"
+                                                        th:text="${publisher.getName()}"
+                                                        th:value="${publisher.getId()}"></option>
+                                            </select>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button class="btn btn-success" type="submit">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- Main Content -->
+    <!-- Footer -->
+    <div th:insert="components/footer"></div>
+    <!-- Footer -->
+</div>
+</body>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- Select2 -->
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<script th:inline="javascript">
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+    })
+
+    /*<![CDATA[*/
+
+    const state = /*[[${state}]]*/ '';
+    if (state) {
+        switch (state.stateCode) {
+            case 1:
+                toastr.success(state.message);
+                break;
+            case 2:
+                toastr.info(state.message);
+                break;
+            case 3:
+                toastr.warning(state.message);
+                break;
+            case 4:
+                toastr.error(state.message);
+                break;
+            default:
+                console.log(state);
+        }
+    }
+    /*]]>*/
+</script>
+</html>

@@ -28,7 +28,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html"
+                            <a th:href="@{/book/}"
                                th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kitap Paneli</p>
@@ -36,7 +36,7 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a class="nav-link" href="../index.html">
+                            <a class="nav-link" th:href="@{/book/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
                             </a>

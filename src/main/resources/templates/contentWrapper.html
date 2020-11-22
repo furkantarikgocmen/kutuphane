@@ -126,8 +126,10 @@
                                 <table class="table m-0">
                                     <thead>
                                     <tr>
-                                        <th>Adı</th>
                                         <th>ISBN</th>
+                                        <th>Adı</th>
+                                        <th>Açıklama</th>
+                                        <th>Alt Adı</th>
                                         <th>Yazar</th>
                                         <th>Yayın Evi</th>
                                     </tr>
@@ -135,9 +137,12 @@
                                     <tbody>
                                     <!--/*@thymesVar id="book" type="com.ftg.kutuphane.entitiy.Book"*/-->
                                     <tr th:each="book:${top5Book}" th:value="${book.getId()}">
-                                        <td th:text="${book.getName()}"></td>
                                         <td th:text="${book.getIsbn()}"></td>
-                                        <td th:text="${book.getAuthor().getName()}"></td>
+                                        <td th:text="${book.getName()}"></td>
+                                        <td th:if="${book.getDescription()}"
+                                            th:text="${book.getDescription().length() < 150} ? ${book.getDescription()} : ${book.getDescription().substring(0,150) + '...'} "></td>
+                                        <td th:text="${book.getSubName()}"></td>
+                                        <td th:text="${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()}"></td>
                                         <td th:text="${book.getPublisher().getName()}"></td>
                                     </tr>
                                     </tbody>

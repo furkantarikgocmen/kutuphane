@@ -42,6 +42,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/account/delete/{id}").hasAuthority("ADMIN")
                 //Own Account Updates
                 .antMatchers("/account/update").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                //Book
+                .antMatchers("/book/").hasAnyAuthority("ADMIN","MODERATOR", "USER")
+                .antMatchers("/book/new").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/book/update/{id}").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/book/delete/{id}").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

@@ -55,7 +55,7 @@ public class AuthorService {
                 backState.setStateCode(StateCode.ERROR);
             }
         } else {
-            logger.warn("Access Denied Saving Author{} {} by {}_{}", author.getName(), author.getSurname(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+            logger.warn("Access Denied Saving Author {} {} by {}_{}", author.getName(), author.getSurname(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
             backState.setMessage("Yazar Ekleme Yetkiniz Bulunmuyor!");
             backState.setStateCode(StateCode.WARNING);
         }
