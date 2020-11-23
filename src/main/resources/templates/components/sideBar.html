@@ -36,7 +36,7 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a class="nav-link" th:href="@{/book/new}">
+                            <a th:href="@{/book/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
                             </a>
@@ -54,7 +54,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html"
+                            <a th:href="@{/publisher/}"
                                th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yayın Evi Paneli</p>
@@ -62,7 +62,7 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a class="nav-link" href="../index.html">
+                            <a th:href="@{/publisher/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Yayın Evi Ekle</p>
                             </a>
@@ -88,7 +88,7 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a class="nav-link" th:href="@{/author/new}">
+                            <a th:href="@{/author/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
                             </a>
@@ -96,9 +96,9 @@
                     </ul>
                 </li>
 
-                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('user') ? 'menu-open' : ''}"
+                <li th:class="' nav-item has-treeview '+ ${#httpServletRequest.requestURI.contains('account') ? 'menu-open' : ''}"
                     th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('user') ? 'active' : ''}">
+                    <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.contains('account') ? 'active' : ''}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             Kullanıcı
@@ -115,7 +115,7 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a class="nav-link" th:href="@{/account/new}">
+                            <a th:href="@{/account/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>
                             </a>
