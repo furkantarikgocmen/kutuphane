@@ -1,0 +1,10 @@
+[Unit]
+Description=Kutuphane App
+
+[Service]
+WorkingDirectory=/home/ubuntu
+ExecStart=/usr/bin/java -jar kutuphane-0.0.1-SNAPSHOT.jar.jar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
