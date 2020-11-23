@@ -51,6 +51,8 @@ public class BookController {
         Book newBook = new Book();
         modelAndView.addObject("state", bookService.save(book));
         modelAndView.addObject("book", newBook);
+        modelAndView.addObject("authors", authorService.findAll());
+        modelAndView.addObject("publishers", publisherService.findAll());
         modelAndView.setViewName("book/newBook");
         return modelAndView;
     }

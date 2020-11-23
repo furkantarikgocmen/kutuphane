@@ -39,6 +39,14 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
+    public Book findByIsbn(String isbn) {
+        return bookRepository.findByIsbn(isbn);
+    }
+
+    public boolean existsBookByIsbn(String isbn) {
+        return bookRepository.existsBookByIsbn(isbn);
+    }
+
     public BackState deleteBooksByAuthor(Author author) {
         BackState backState = new BackState();
         if (accountService.isAdmin()) {
@@ -63,6 +71,12 @@ public class BookService {
     public BackState save(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
+            if (existsBookByIsbn(book.getIsbn())) {
+                logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());
+                backState.setMessage("Bu ISBN Numarasına Kayıtlı Bir Kitap Zaten Var!");
+                backState.setStateCode(StateCode.WARNING);
+                return backState;
+            }
             try {
                 bookRepository.save(book);
                 logger.info("Book {} {} Saved by {}_{}", book.getName(), book.getSubName(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
@@ -84,6 +98,14 @@ public class BookService {
     public BackState update(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
+            if (existsBookByIsbn(book.getIsbn())) {
+                if(bookRepository.findByIsbn(book.getIsbn()).getId() != book.getId()){
+                    logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());
+                    backState.setMessage("Bu ISBN Numarasına Kayıtlı Bir Kitap Zaten Var!");
+                    backState.setStateCode(StateCode.WARNING);
+                    return backState;
+                }
+            }
             try {
                 bookRepository.save(book);
                 logger.info("Book {} {} Updated by {}_{}", book.getName(), book.getSubName(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
