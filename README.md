@@ -100,6 +100,8 @@ nginx -s reload
 * #### Copy kutuphane.service to systemd
 ```bash
 sudo cp kutuphane.service /etc/systemd/system/
+sudo systemctl enable kutuphane.service
+sudo systemctl start kutuphane.service
 ```
 
 
