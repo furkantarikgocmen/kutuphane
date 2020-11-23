@@ -69,7 +69,7 @@ spring.datasource.username=pdbuser
 spring.datasource.password=123
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.initialization-mode=always
-spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.ddl-auto=create-drop #this line is (already create-drop) for development. dont forget make a update!
 # ==============================================================
 # = H2 Database Props.
 # ==============================================================
@@ -88,4 +88,18 @@ spring.jpa.hibernate.ddl-auto=create-drop
 #spring.h2.console.settings.trace=false
 #spring.h2.console.settings.web-allow-others=false
 ```
+
+---
+## Nginx & Systemd Configs
+* #### Copy kutuphane.conf to nginx
+- *important: kutuphane-0.0.1-SNAPSHOT.jar file must be in home directory*
+```bash
+sudo cp kutuphane.conf /etc/nginx/conf.d/
+nginx -s reload
+```
+* #### Copy kutuphane.service to systemd
+```bash
+sudo cp kutuphane.service /etc/systemd/system/
+```
+
 
