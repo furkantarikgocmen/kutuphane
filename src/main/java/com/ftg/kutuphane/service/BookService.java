@@ -47,49 +47,7 @@ public class BookService {
     public boolean existsBookByIsbn(String isbn) {
         return bookRepository.existsBookByIsbn(isbn);
     }
-/*
-    public BackState deleteBooksByAuthor(Author author) {
-        BackState backState = new BackState();
-        if (accountService.isAdmin()) {
-            try {
-                bookRepository.deleteBooksByAuthor(author);
-                logger.info("Author {} Books Deleted by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-                backState.setMessage("Yazar Kitaplarını Silme İşlemi Başarılı!");
-                backState.setStateCode(StateCode.SUCCESS);
-            } catch (Exception e) {
-                logger.error("Error Deleting Author {} Books by {}_{} {}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
-                backState.setMessage("Yazar Kitaplarını Silme İşleminde Bir Hata Oluştu!");
-                backState.setStateCode(StateCode.ERROR);
-            }
-        } else {
-            logger.warn("Access Denied Deleting Author {} Books by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-            backState.setMessage("Yazar Kitaplarını Silme Yetkiniz Bulunmuyor!");
-            backState.setStateCode(StateCode.WARNING);
-        }
-        return backState;
-    }
 
-    public BackState deleteBooksByPublisher(Publisher publisher) {
-        BackState backState = new BackState();
-        if (accountService.isAdmin()) {
-            try {
-                bookRepository.deleteBooksByPublisher(publisher);
-                logger.info("Publisher {} Books Deleted by {}_{}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-                backState.setMessage("Yayın Evi Kitaplarını Silme İşlemi Başarılı!");
-                backState.setStateCode(StateCode.SUCCESS);
-            } catch (Exception e) {
-                logger.error("Error Deleting Publisher {} Books by {}_{} {}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
-                backState.setMessage("Yayın Evi Kitaplarını Silme İşleminde Bir Hata Oluştu!");
-                backState.setStateCode(StateCode.ERROR);
-            }
-        } else {
-            logger.warn("Access Denied Deleting Publisher {} Books by {}_{}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
-            backState.setMessage("Yayın Evi Kitaplarını Silme Yetkiniz Bulunmuyor!");
-            backState.setStateCode(StateCode.WARNING);
-        }
-        return backState;
-    }
-*/
     public BackState save(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
@@ -121,7 +79,7 @@ public class BookService {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
             if (existsBookByIsbn(book.getIsbn())) {
-                if(bookRepository.findByIsbn(book.getIsbn()).getId() != book.getId() && bookRepository.findByIsbn(book.getIsbn()).getIsbn().equals(book.getIsbn())){
+                if(!bookRepository.findByIsbn(book.getIsbn()).getId().equals(book.getId())  && bookRepository.findByIsbn(book.getIsbn()).getIsbn().equals(book.getIsbn())){
                     logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());
                     backState.setMessage("Bu ISBN Numarasına Kayıtlı Bir Kitap Zaten Var!");
                     backState.setStateCode(StateCode.WARNING);

@@ -77,8 +77,8 @@
                                         <td th:text="${book.getName()}"></td>
                                         <td th:text="${book.getDescription().length() < 150} ? ${book.getDescription()} : ${book.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${book.getSubName()}"></td>
-                                        <td th:text="${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()}"></td>
-                                        <td th:text="${book.getPublisher().getName()}"></td>
+                                        <td th:text="${book.getAuthor()} ? ${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()} : '-' "></td>
+                                        <td th:text="${book.getPublisher()} ? ${book.getPublisher().getName()} :'-'"></td>
                                         <td>
                                             <a
                                                     th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR') ? '' : ' disabled'}"

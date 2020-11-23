@@ -60,7 +60,6 @@
                                 <table class="table table-bordered table-hover" id="example2">
                                     <thead>
                                     <tr>
-                                        <th>Yazar ID</th>
                                         <th>Yazar Adı</th>
                                         <th>Yazar Soyadı</th>
                                         <th>Yazar Açıklaması</th>
@@ -72,7 +71,6 @@
                                     <tbody>
                                     <!--/*@thymesVar id="author" type="com.ftg.kutuphane.entitiy.Author"*/-->
                                     <tr th:each="author:${authors}" th:value="${author.getId()}">
-                                        <td th:text="${author.getId()}"></td>
                                         <td th:text="${author.getName()}"></td>
                                         <td th:text="${author.getSurname()}"></td>
                                         <td th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
@@ -97,7 +95,6 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Yazar ID</th>
                                         <th>Yazar Adı</th>
                                         <th>Yazar Soyadı</th>
                                         <th>Yazar Açıklaması</th>

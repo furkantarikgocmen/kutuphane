@@ -141,8 +141,8 @@
                                         <td th:text="${book.getName()}"></td>
                                         <td th:text="${book.getDescription().length() < 150} ? ${book.getDescription()} : ${book.getDescription().substring(0,150) + '...'} "></td>
                                         <td th:text="${book.getSubName()}"></td>
-                                        <td th:text="${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()}"></td>
-                                        <td th:text="${book.getPublisher().getName()}"></td>
+                                        <td th:text="${book.getAuthor()} ? ${book.getAuthor().getName()} + ' '+${book.getAuthor().getSurname()} : '-' "></td>
+                                        <td th:text="${book.getPublisher()} ? ${book.getPublisher().getName()} :'-'"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -157,55 +157,6 @@
                                 Kitap Ekle</a>
                             <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
                                th:href="@{/book/}">Bütün Kitapları Gör</a>
-                        </div>
-                        <!-- /.card-footer -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <div class="col-lg-3 col-lg-12">
-                    <!-- TABLE: Top 5 Publishers -->
-                    <div class="card">
-                        <div class="card-header border-transparent">
-                            <h3 class="card-title">Son Eklenen Yayın Evleri</h3>
-
-                            <div class="card-tools">
-                                <button class="btn btn-tool" data-card-widget="collapse" type="button">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button class="btn btn-tool" data-card-widget="remove" type="button">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table m-0">
-                                    <thead>
-                                    <tr>
-                                        <th>Adı</th>
-                                        <th>Toplam Kitap Sayısı</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <!--/*@thymesVar id="publisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
-                                    <tr th:each="publisher:${top5Publisher}" th:value="${publisher.getId()}">
-                                        <td th:text="${publisher.getName()}"></td>
-                                        <td th:text="${publisher.getBooks.size()}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <a class="btn btn-sm btn-outline-primary btn-sm float-left "
-                               th:href="@{/publisher/new}"
-                               th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Yeni
-                                Yayın Evi Ekle</a>
-                            <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
-                               th:href="@{/publisher/}">Bütün Yayın Evlerini Gör</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>
@@ -243,8 +194,8 @@
                                     <tr th:each="author:${top5Author}" th:value="${author.getId()}">
                                         <td th:text="${author.getName()}"></td>
                                         <td th:text="${author.getSurname()}"></td>
-                                        <td th:text="${author.getDescription().length() < 150} ? ${author.getDescription()} : ${author.getDescription().substring(0,150) + '...'} "></td>
-                                        <td th:text="${author.getBooks.size()}"></td>
+                                        <td th:text="${author.getDescription().length() < 100} ? ${author.getDescription()} : ${author.getDescription().substring(0,100) + '...'} "></td>
+                                        <td th:text="${author.getBooks().size()}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -259,6 +210,57 @@
                                 Yazar Ekle</a>
                             <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
                                th:href="@{/author/}">Bütün Yazarları Gör</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-lg-3 col-lg-12">
+                    <!-- TABLE: Top 5 Publishers -->
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Son Eklenen Yayın Evleri</h3>
+
+                            <div class="card-tools">
+                                <button class="btn btn-tool" data-card-widget="collapse" type="button">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button class="btn btn-tool" data-card-widget="remove" type="button">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Yayın Evi Adı</th>
+                                        <th>Yayın Evi Bilgisi</th>
+                                        <th>Kitap Sayısı</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--/*@thymesVar id="publisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
+                                    <tr th:each="publisher:${top5Publisher}" th:value="${publisher.getId()}">
+                                        <td th:text="${publisher.getName()}"></td>
+                                        <td th:text="${publisher.getInfo().length() < 150} ? ${publisher.getInfo()} : ${publisher.getInfo().substring(0,130) + '...'} "></td>
+                                        <td th:text="${publisher.getBooks().size()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <a class="btn btn-sm btn-outline-primary btn-sm float-left "
+                               th:href="@{/publisher/new}"
+                               th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">Yeni
+                                Yayın Evi Ekle</a>
+                            <a class="btn btn-sm btn-outline-secondary btn-lg float-right"
+                               th:href="@{/publisher/}">Bütün Yayın Evlerini Gör</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>

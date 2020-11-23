@@ -37,7 +37,7 @@ public class Author {
     private String description;
 
     @Singular
-    @OneToMany(cascade = CascadeType.ALL) //try using set
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "book_author",
             schema = "\"kutuphane_schema\"",
             joinColumns = @JoinColumn(name = "author_id"),

@@ -32,12 +32,10 @@ public class Publisher {
     private String info;
 
     @Singular
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "book_publisher",
             schema = "\"kutuphane_schema\"",
             joinColumns = @JoinColumn(name = "publisher_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books;
-
-    //todo: description, telephone, e-mail vs. props
 }
