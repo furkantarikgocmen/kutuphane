@@ -28,15 +28,16 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{/book/}"
-                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}"
+                               th:href="@{/book/}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Kitap Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a th:href="@{/book/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}"
+                               th:href="@{/book/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kitap Ekle</p>
                             </a>
@@ -54,15 +55,16 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{/publisher/}"
-                               th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/') ? 'active' : ''}"
+                               th:href="@{/publisher/}">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>Yayın Evi Paneli</p>
                             </a>
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a th:href="@{/publisher/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}"
+                               th:href="@{/publisher/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Yayın Evi Ekle</p>
                             </a>
@@ -88,7 +90,8 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a th:href="@{/author/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}"
+                               th:href="@{/author/new}">
                                 <i class="nav-icon fas fa-plus disabled"></i>
                                 <p>Yazar Ekle</p>
                             </a>
@@ -115,7 +118,8 @@
                         </li>
                         <li class="nav-item"
                             th:if="${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR')}">
-                            <a th:href="@{/account/new}" th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}">
+                            <a th:class="' nav-link '+ ${#httpServletRequest.requestURI.endsWith('/new') ? 'active' : ''}"
+                               th:href="@{/account/new}">
                                 <i class="nav-icon fas fa-plus"></i>
                                 <p>Kullanıcı Ekle</p>
                             </a>

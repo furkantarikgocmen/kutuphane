@@ -46,7 +46,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ModelAndView newBook(@ModelAttribute(value = "book") Book book){
+    public ModelAndView newBook(@ModelAttribute(value = "book") Book book) {
         ModelAndView modelAndView = new ModelAndView();
         Book newBook = new Book();
         modelAndView.addObject("state", bookService.save(book));
@@ -69,10 +69,10 @@ public class BookController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView updateBook(@PathVariable("id") UUID id, @ModelAttribute(value = "book") Book book){
+    public ModelAndView updateBook(@PathVariable("id") UUID id, @ModelAttribute(value = "book") Book book) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("state",bookService.update(book));
-        modelAndView.addObject("book",bookService.findById(id));
+        modelAndView.addObject("state", bookService.update(book));
+        modelAndView.addObject("book", bookService.findById(id));
         modelAndView.addObject("publishers", publisherService.findAll());
         modelAndView.addObject("authors", authorService.findAll());
         modelAndView.setViewName("book/updateBook");
@@ -80,7 +80,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteBook(@PathVariable("id") UUID id){
+    public ModelAndView deleteBook(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", bookService.delete(bookService.findById(id)));
         modelAndView.addObject("books", bookService.findAll());

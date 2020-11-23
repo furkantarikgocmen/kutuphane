@@ -1,9 +1,7 @@
 package com.ftg.kutuphane.service;
 
-import com.ftg.kutuphane.entitiy.Author;
 import com.ftg.kutuphane.entitiy.BackState;
 import com.ftg.kutuphane.entitiy.Book;
-import com.ftg.kutuphane.entitiy.Publisher;
 import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.repository.BookRepository;
 import org.slf4j.Logger;
@@ -79,7 +77,7 @@ public class BookService {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
             if (existsBookByIsbn(book.getIsbn())) {
-                if(!bookRepository.findByIsbn(book.getIsbn()).getId().equals(book.getId())  && bookRepository.findByIsbn(book.getIsbn()).getIsbn().equals(book.getIsbn())){
+                if (!bookRepository.findByIsbn(book.getIsbn()).getId().equals(book.getId()) && bookRepository.findByIsbn(book.getIsbn()).getIsbn().equals(book.getIsbn())) {
                     logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());
                     backState.setMessage("Bu ISBN Numarasına Kayıtlı Bir Kitap Zaten Var!");
                     backState.setStateCode(StateCode.WARNING);

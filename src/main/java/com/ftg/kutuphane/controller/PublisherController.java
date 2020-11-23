@@ -58,16 +58,16 @@ public class PublisherController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public ModelAndView updatePublisher(@PathVariable("id") UUID id, @ModelAttribute(value = "publisher") Publisher publisher){
+    public ModelAndView updatePublisher(@PathVariable("id") UUID id, @ModelAttribute(value = "publisher") Publisher publisher) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("state",publisherService.update(publisher));
-        modelAndView.addObject("publisher",publisherService.findById(id));
+        modelAndView.addObject("state", publisherService.update(publisher));
+        modelAndView.addObject("publisher", publisherService.findById(id));
         modelAndView.setViewName("publisher/updatePublisher");
         return modelAndView;
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deletePublisher(@PathVariable("id") UUID id){
+    public ModelAndView deletePublisher(@PathVariable("id") UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("state", publisherService.delete(publisherService.findById(id)));
         modelAndView.addObject("publisher", publisherService.findAll());

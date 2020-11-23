@@ -43,14 +43,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Own Account Updates
                 .antMatchers("/account/update").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
                 //Book
-                .antMatchers("/book/").hasAnyAuthority("ADMIN","MODERATOR", "USER")
-                .antMatchers("/book/new").hasAnyAuthority("ADMIN","MODERATOR")
-                .antMatchers("/book/update/{id}").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/book/").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/book/new").hasAnyAuthority("ADMIN", "MODERATOR")
+                .antMatchers("/book/update/{id}").hasAnyAuthority("ADMIN", "MODERATOR")
                 .antMatchers("/book/delete/{id}").hasAuthority("ADMIN")
                 //Publisher
-                .antMatchers("/publisher/").hasAnyAuthority("ADMIN","MODERATOR", "USER")
-                .antMatchers("/publisher/new").hasAnyAuthority("ADMIN","MODERATOR")
-                .antMatchers("/publisher/update/{id}").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/publisher/").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/publisher/new").hasAnyAuthority("ADMIN", "MODERATOR")
+                .antMatchers("/publisher/update/{id}").hasAnyAuthority("ADMIN", "MODERATOR")
                 .antMatchers("/publisher/delete/{id}").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()

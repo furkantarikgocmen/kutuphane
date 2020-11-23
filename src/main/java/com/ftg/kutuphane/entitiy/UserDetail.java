@@ -11,19 +11,19 @@ import java.util.UUID;
 
 public class UserDetail extends Account implements UserDetails {
 
-    private UUID id;
+    private final UUID id;
 
-    private String name;
+    private final String name;
 
-    private String surname;
+    private final String surname;
 
-    private String mail;
+    private final String mail;
 
-    private String userName;
+    private final String userName;
 
-    private String password;
+    private final String password;
 
-    private Role role;
+    private final Role role;
 
 
     /**

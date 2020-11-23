@@ -88,21 +88,23 @@
                                     <div class="form-group">
                                         <div class="col-12 col-sm-6 float-lg-left">
                                             <label>Yazar</label>
-                                            <select th:field="*{author.id}" class="select2" style="width: 100%;" data-dropdown-css-class="select2-primary">
+                                            <select class="select2" data-dropdown-css-class="select2-primary" style="width: 100%;"
+                                                    th:field="*{author.id}">
                                                 <option th:each="author, i: ${authors}"
+                                                        th:selected="${author.getId()} == ${book.getAuthor().getId()}"
                                                         th:text="${author.getName()} + ' ' + ${author.getSurname()}"
-                                                        th:value="${author.getId()}"
-                                                        th:selected="${author.getId()} == ${book.getAuthor().getId()}"></option>
+                                                        th:value="${author.getId()}"></option>
                                             </select>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-12 col-sm-6 float-lg-right">
                                             <label>Yayın Evi</label>
-                                            <select th:field="*{publisher.id}" class="select2" style="width: 100%;" data-dropdown-css-class="select2-primary">
+                                            <select class="select2" data-dropdown-css-class="select2-primary" style="width: 100%;"
+                                                    th:field="*{publisher.id}">
                                                 <option th:each="publisher, i: ${publishers}"
+                                                        th:selected="${publisher.getId()} == ${book.getPublisher().getId()}"
                                                         th:text="${publisher.getName()}"
-                                                        th:value="${publisher.getId()}"
-                                                        th:selected="${publisher.getId()} == ${book.getPublisher().getId()}"></option>
+                                                        th:value="${publisher.getId()}"></option>
                                             </select>
                                         </div>
                                         <!-- /.col -->
