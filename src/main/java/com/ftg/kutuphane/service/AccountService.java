@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @Service("accountService")
 public class AccountService {
-    private static final Logger logger = LoggerFactory.getLogger(Account.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
     private final AccountRepository accountRepository;
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;

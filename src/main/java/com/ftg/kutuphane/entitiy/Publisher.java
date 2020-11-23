@@ -27,6 +27,10 @@ public class Publisher {
     @NotNull(message = "Name must not be null")
     private String name;
 
+    @Column(name = "info")
+    @NotNull(message = "Name must not be null")
+    private String info;
+
     @Singular
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_publisher",

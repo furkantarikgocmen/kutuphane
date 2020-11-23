@@ -3,6 +3,7 @@ package com.ftg.kutuphane.service;
 import com.ftg.kutuphane.entitiy.Author;
 import com.ftg.kutuphane.entitiy.BackState;
 import com.ftg.kutuphane.entitiy.Book;
+import com.ftg.kutuphane.entitiy.Publisher;
 import com.ftg.kutuphane.enums.StateCode;
 import com.ftg.kutuphane.repository.BookRepository;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class BookService {
     public boolean existsBookByIsbn(String isbn) {
         return bookRepository.existsBookByIsbn(isbn);
     }
-
+/*
     public BackState deleteBooksByAuthor(Author author) {
         BackState backState = new BackState();
         if (accountService.isAdmin()) {
@@ -68,6 +69,27 @@ public class BookService {
         return backState;
     }
 
+    public BackState deleteBooksByPublisher(Publisher publisher) {
+        BackState backState = new BackState();
+        if (accountService.isAdmin()) {
+            try {
+                bookRepository.deleteBooksByPublisher(publisher);
+                logger.info("Publisher {} Books Deleted by {}_{}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+                backState.setMessage("Yayın Evi Kitaplarını Silme İşlemi Başarılı!");
+                backState.setStateCode(StateCode.SUCCESS);
+            } catch (Exception e) {
+                logger.error("Error Deleting Publisher {} Books by {}_{} {}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
+                backState.setMessage("Yayın Evi Kitaplarını Silme İşleminde Bir Hata Oluştu!");
+                backState.setStateCode(StateCode.ERROR);
+            }
+        } else {
+            logger.warn("Access Denied Deleting Publisher {} Books by {}_{}", publisher.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+            backState.setMessage("Yayın Evi Kitaplarını Silme Yetkiniz Bulunmuyor!");
+            backState.setStateCode(StateCode.WARNING);
+        }
+        return backState;
+    }
+*/
     public BackState save(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
@@ -98,6 +120,7 @@ public class BookService {
     public BackState update(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
+            //burayı düzenle
             if (existsBookByIsbn(book.getIsbn())) {
                 if(bookRepository.findByIsbn(book.getIsbn()).getId() != book.getId()){
                     logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());

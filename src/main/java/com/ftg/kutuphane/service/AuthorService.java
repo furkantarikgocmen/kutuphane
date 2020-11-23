@@ -77,7 +77,7 @@ public class AuthorService {
                 backState.setStateCode(StateCode.ERROR);
             }
         } else {
-            logger.warn("Access Denied Updating Author{} by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+            logger.warn("Access Denied Updating Author {} by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
             backState.setMessage("Yazar Güncelleme Yetkiniz Bulunmuyor!");
             backState.setStateCode(StateCode.WARNING);
         }
@@ -88,7 +88,7 @@ public class AuthorService {
         BackState backState = new BackState();
         if (accountService.isAdmin()) {
             try {
-                if (bookService.deleteBooksByAuthor(author).getStateCode() == StateCode.SUCCESS.getStateCode()) {
+                /*if (bookService.deleteBooksByAuthor(author).getStateCode() == StateCode.SUCCESS.getStateCode()) {
                     authorRepository.delete(author);
                     logger.info("Author {} Deleted by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
                     backState.setMessage("Yazar Silme İşlemi Başarılı!");
@@ -97,7 +97,11 @@ public class AuthorService {
                     logger.error("Error Deleting Author {} With Books by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
                     backState.setMessage("Yazarı Kitapları İle Birlikte Silme İşleminde Bir Hata Oluştu!");
                     backState.setStateCode(StateCode.ERROR);
-                }
+                }*/
+                authorRepository.delete(author);
+                logger.info("Author {} Deleted by {}_{}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities());
+                backState.setMessage("Yazar Silme İşlemi Başarılı!");
+                backState.setStateCode(StateCode.SUCCESS);
             } catch (Exception e) {
                 logger.error("Error Deleting Author {} by {}_{} {}", author.getId(), accountService.getActiveAccount().getUserName(), accountService.getAuthorities(), e.getMessage());
                 backState.setMessage("Yazar Silme İşleminde Bir Hata Oluştu!");

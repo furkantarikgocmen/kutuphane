@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Yayın Evi Paneli</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Theme style -->
+    <link href="/dist/css/adminlte.min.css" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- DataTables -->
+    <link href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet">
+    <!-- Toastr -->
+    <link href="/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <div th:insert="components/navBar"></div>
+    <!-- Navigation Bar -->
+    <!-- Left Bar -->
+    <div th:insert="components/sideBar"></div>
+    <!-- Left Bar -->
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Yayın Evi Paneli</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Yayın Evleri</a></li>
+                            <li class="breadcrumb-item active">Liste</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Kayıtlı Yayın Evi Listesi</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered table-hover" id="example2">
+                                    <thead>
+                                    <tr>
+                                        <th>Yayın Evi Adı</th>
+                                        <th>Yayın Evi Bilgisi</th>
+                                        <th>Kitap Sayısı</th>
+                                        <th>Güncelle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--/*@thymesVar id="publisher" type="com.ftg.kutuphane.entitiy.Publisher"*/-->
+                                    <tr th:each="publisher:${publishers}" th:value="${publisher.getId()}">
+                                        <td th:text="${publisher.getName()}"></td>
+                                        <td th:text="${publisher.getInfo().length() < 150} ? ${publisher.getInfo()} : ${publisher.getInfo().substring(0,130) + '...'} "></td>
+                                        <td th:text="${publisher.getBooks().size()}"></td>
+                                        <td>
+                                            <a
+                                                    th:class="'btn btn-block btn-outline-info '+${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR') ? '' : ' disabled'}"
+                                                    th:href="@{/publisher/update/{id}(id=${publisher.getId()})}"
+                                                    type="button"
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') or #strings.contains(#authentication.authorities,'MODERATOR') ? 'fas fa-pen' : ' fas fa-lock'}"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a
+                                                    th:class="'btn btn-block btn-outline-danger '+${#strings.contains(#authentication.authorities,'ADMIN') ? '' : 'disabled'}"
+                                                    th:href="@{/publisher/delete/{id}(id=${publisher.getId()})}"
+                                                    type="button"
+                                            ><i th:class="''+${#strings.contains(#authentication.authorities,'ADMIN') ? 'fas fa-trash' : 'fas fa-lock'}"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Yayın Evi Adı</th>
+                                        <th>Yayın Evi Bilgisi</th>
+                                        <th>Kitap Sayısı</th>
+                                        <th>Güncelle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- Main Content -->
+    <!-- Footer -->
+    <div th:insert="components/footer"></div>
+    <!-- Footer -->
+</div>
+</body>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+
+<!-- DataTables -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    $(function () {
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+    const state = /*[[${state}]]*/ '';
+    if (state) {
+        switch (state.stateCode) {
+            case 1:
+                toastr.success(state.message);
+                break;
+            case 2:
+                toastr.info(state.message);
+                break;
+            case 3:
+                toastr.warning(state.message);
+                break;
+            case 4:
+                toastr.error(state.message);
+                break;
+            default:
+                console.log(state);
+        }
+    }
+    /*]]>*/
+</script>
+<!-- page script -->
+</html>
