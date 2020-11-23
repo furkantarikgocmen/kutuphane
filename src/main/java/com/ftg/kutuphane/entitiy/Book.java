@@ -29,7 +29,7 @@ public class Book {
     //todo: regex
     @NotEmpty(message = "Please provide an ISBN")
     @NotNull(message = "ISBN must not be null")
-    @Column(name = "ısbn", unique = true)
+    @Column(name = "isbn", unique = true)
     String isbn;
 
     @Column(name = "sub_name")
