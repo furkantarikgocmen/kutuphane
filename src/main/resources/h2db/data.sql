@@ -6,7 +6,7 @@ INSERT INTO kutuphane_schema.role (id,name) VALUES
 INSERT INTO kutuphane_schema.account (account_id,mail,name,password,surname,user_name,role_id) VALUES
 	 ('47852672-38f0-4cf6-adde-fdf0cfae5178','admin@kutuphane.com','Furkan Tarık','$2a$10$q2awP67azUvY0a9aJgMJaeQhmN4JrO.4jJrihHulwOWyL3p4H4Dlm','Göçmen','admin',1),
 	 ('169a0f97-9fd0-49ea-93c6-1efd5c3a1b47','moderator@kutuphane.com','Furkan Tarık','$2a$10$q2awP67azUvY0a9aJgMJaeQhmN4JrO.4jJrihHulwOWyL3p4H4Dlm','Göçmen','moderator',2),
-	 ('0ea412ac-0c56-4afd-84ff-1d2c63188cad','user@kutuphane.com','Furkan Tarık','$2a$10$U7FcaxBPJikGHiS6GBl7xONjEHh0DRSndr/Vt6oJjIw9ZuFx0l3ZG','Göçmen','user',3);
+	 ('0ea412ac-0c56-4afd-84ff-1d2c63188cad','user@kutuphane.com','Furkan Tarık','$2a$10$q2awP67azUvY0a9aJgMJaeQhmN4JrO.4jJrihHulwOWyL3p4H4Dlm','Göçmen','user',3);
 
 
 INSERT INTO kutuphane_schema.author (id,description,name,surname) VALUES
