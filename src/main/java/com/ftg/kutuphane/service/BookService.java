@@ -120,9 +120,8 @@ public class BookService {
     public BackState update(Book book) {
         BackState backState = new BackState();
         if (accountService.isAdmin() || accountService.isModerator()) {
-            //burayı düzenle
             if (existsBookByIsbn(book.getIsbn())) {
-                if(bookRepository.findByIsbn(book.getIsbn()).getId() != book.getId()){
+                if(bookRepository.findByIsbn(book.getIsbn()).getId() != book.getId() && bookRepository.findByIsbn(book.getIsbn()).getIsbn().equals(book.getIsbn())){
                     logger.warn("Error Saving Book, ISBN Already Exists  {}", book.getIsbn());
                     backState.setMessage("Bu ISBN Numarasına Kayıtlı Bir Kitap Zaten Var!");
                     backState.setStateCode(StateCode.WARNING);

@@ -47,6 +47,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/book/new").hasAnyAuthority("ADMIN","MODERATOR")
                 .antMatchers("/book/update/{id}").hasAnyAuthority("ADMIN","MODERATOR")
                 .antMatchers("/book/delete/{id}").hasAuthority("ADMIN")
+                //Publisher
+                .antMatchers("/publisher/").hasAnyAuthority("ADMIN","MODERATOR", "USER")
+                .antMatchers("/publisher/new").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/publisher/update/{id}").hasAnyAuthority("ADMIN","MODERATOR")
+                .antMatchers("/publisher/delete/{id}").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
